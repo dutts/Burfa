@@ -8,7 +8,7 @@ namespace Burfa.Common
 {
     public class GameEngine : IGameEngine
     {
-        private GameBoard _board;
+        public GameBoard Board {get;set;}
 
         public Player CurrentPlayer { get; set; }
 
@@ -24,8 +24,7 @@ namespace Burfa.Common
 
         public void Reset()
         {
-            _board = new GameBoard();
+            Board = new GameBoard();
         }
     }
-
 }

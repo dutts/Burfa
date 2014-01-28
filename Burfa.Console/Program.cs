@@ -14,8 +14,12 @@ namespace Burfa.Console
             var engine = new GameEngine();
             while (true)
             {
-                var key = System.Console.ReadKey();
-                System.Console.WriteLine(key);
+                var key = System.Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Escape)
+                    break;
+                else
+                    engine.Board.ToConsole();
+
             }
         }
     }

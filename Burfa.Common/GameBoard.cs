@@ -10,19 +10,19 @@ namespace Burfa.Common
     public class GameBoard
     {
         private GameBoardSquare[] board;
-        private int _boardEdgeLength;
+        public int BoardEdgeLength { get; set; }
 
         public int GameBoardSquareCount
         {
             get
             {
-                return _boardEdgeLength * _boardEdgeLength;
+                return BoardEdgeLength * BoardEdgeLength;
             }
         }
 
         public GameBoard(int boardEdgeLength = 8)
         {
-            _boardEdgeLength = boardEdgeLength;
+            BoardEdgeLength = boardEdgeLength;
             Reset();
         }
 
@@ -40,24 +40,24 @@ namespace Burfa.Common
             board = new GameBoardSquare[GameBoardSquareCount];
             for (int i = 0; i < GameBoardSquareCount; i++)
             {
-                board[i] = new GameBoardSquare() { X = i % _boardEdgeLength, Y = Math.Abs(i/_boardEdgeLength) };
+                board[i] = new GameBoardSquare() { X = i % BoardEdgeLength, Y = Math.Abs(i/BoardEdgeLength) };
             }
         }
 
         public void SetSquare(int x, int y, Player player)
         {
-            if (x > _boardEdgeLength - 1) throw new BoardIndexOutOfRangeException("x value of " + x + " is larger than board edge length (" + _boardEdgeLength + ")");
-            if (y > _boardEdgeLength - 1) throw new BoardIndexOutOfRangeException("y value of " + x + " is larger than board edge length (" + _boardEdgeLength + ")");
+            if (x > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("x value of " + x + " is larger than board edge length (" + BoardEdgeLength + ")");
+            if (y > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("y value of " + x + " is larger than board edge length (" + BoardEdgeLength + ")");
 
-            board[(x * _boardEdgeLength) + y].Set(player);
+            board[(x * BoardEdgeLength) + y].Set(player);
         }
 
         public GameBoardSquare GetGameBoardSquare(int x, int y)
         {
-            if (x > _boardEdgeLength - 1) throw new BoardIndexOutOfRangeException("x value of " + x + " is larger than board edge length (" + _boardEdgeLength + ")");
-            if (y > _boardEdgeLength - 1) throw new BoardIndexOutOfRangeException("y value of " + x + " is larger than board edge length (" + _boardEdgeLength + ")");
+            if (x > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("x value of " + x + " is larger than board edge length (" + BoardEdgeLength + ")");
+            if (y > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("y value of " + x + " is larger than board edge length (" + BoardEdgeLength + ")");
 
-            return board[(x * _boardEdgeLength) + y];
+            return board[(x * BoardEdgeLength) + y];
         }
     }
 }
