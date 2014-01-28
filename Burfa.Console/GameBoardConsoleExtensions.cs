@@ -12,12 +12,20 @@ namespace Burfa.Console
         public static void ToConsole(this GameBoard gb)
         {
             System.Console.Clear();
-            DrawGridTopAndBottom(gb);
+            for (int i = 0; i < gb.BoardEdgeLength; i++)
+            {
+                System.Console.Write("|---");
+                if (i == gb.BoardEdgeLength - 1) System.Console.WriteLine("|");
+            }
             for (int i = 0; i < gb.BoardEdgeLength; i++)
             {
                 for (int j = 0; j < gb.BoardEdgeLength; j++)
                 {
-                    System.Console.Write("|   ");
+                    var gameSquare = gb.GetGameBoardSquare(j, i);
+                    System.Console.Write("| ");
+                    System.Console.Write(gameSquare.State == null ? " " : gameSquare.State == Player.Black ? "B" : "W");
+                    System.Console.Write(" ");
+                    
                     if (j == gb.BoardEdgeLength - 1) System.Console.WriteLine("|");
                 }
                 for (int j = 0; j < gb.BoardEdgeLength; j++)
@@ -25,16 +33,6 @@ namespace Burfa.Console
                     System.Console.Write("|---");
                     if (j == gb.BoardEdgeLength - 1) System.Console.WriteLine("|");
                 }
-            }
-            //DrawGridTopAndBottom(gb);
-        }
-
-        private static void DrawGridTopAndBottom(GameBoard gb)
-        {
-            for (int i = 0; i < gb.BoardEdgeLength; i++)
-            {
-                System.Console.Write("|---");
-                if (i == gb.BoardEdgeLength - 1) System.Console.WriteLine("|");
             }
         }
     }

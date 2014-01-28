@@ -13,7 +13,7 @@ namespace Burfa.Common
         public int Y { get; set; }
         #endregion
 
-        public Player State
+        public Player? State
         {
             get;
             private set;
