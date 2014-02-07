@@ -11,6 +11,7 @@ namespace Burfa.Common
         public GameBoard Board {get;set;}
 
         public Player CurrentPlayer { get; set; }
+        public GameState CurrentGameState { get; set; }
 
         public GameEngine()
         {
@@ -27,11 +28,17 @@ namespace Burfa.Common
             CurrentPlayer = Player.Black;
         }
 
+        public TurnResult TakeTurn(int x, int y)
+        {
+            return TakeTurn(CurrentPlayer, x, y);
+        }
+
         public TurnResult TakeTurn(Player player, int x, int y)
         {
             var result = new TurnResult() { IsValid = true, State = GameState.InPlay };
             //TODO
-            if (result.IsValid && result.State == GameState.InPlay) ToggleCurrentPlayer();
+            CurrentGameState = result.State;
+            if (result.IsValid && CurrentGameState == GameState.InPlay) ToggleCurrentPlayer();
             return result;
         }
 

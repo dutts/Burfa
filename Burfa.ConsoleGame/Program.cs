@@ -15,14 +15,24 @@ namespace Burfa.ConsoleGame
             engine.ToConsole();
             while (true)
             {
-                var key = Console.ReadKey(true);
-                if (key.Key == ConsoleKey.Escape)
-                    break;
-                else
-                    engine.TakeTurn(engine.CurrentPlayer, -1, -1);
-                    engine.ToConsole();
-
+                Console.WriteLine("Enter move as X,Y:");
+                var line = Console.ReadLine();
+                var coords = line.Split(',');
+                int x,y;
+                if (coords.Length != 2 || !TryParseCoords(coords, out x, out y)) break;
+                engine.TakeTurn(x,y);
+                engine.ToConsole();
             }
+        }
+
+        public static bool TryParseCoords(string[] coords, out int x, out int y)
+        {
+            int tryX = -1;
+            int tryY = -1;
+            var result = (int.TryParse(coords[0], out tryX) && int.TryParse(coords[1], out tryY));
+            x = tryX;
+            y = tryY;
+            return result;
         }
     }
 }
