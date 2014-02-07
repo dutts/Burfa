@@ -5,20 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Burfa.Console
+namespace Burfa.ConsoleGame
 {
     class Program
     {
         static void Main(string[] args)
         {
             var engine = new GameEngine();
+            engine.ToConsole();
             while (true)
             {
-                var key = System.Console.ReadKey(true);
+                var key = Console.ReadKey(true);
                 if (key.Key == ConsoleKey.Escape)
                     break;
                 else
-                    engine.Board.ToConsole();
+                    engine.TakeTurn(engine.CurrentPlayer, -1, -1);
+                    engine.ToConsole();
 
             }
         }

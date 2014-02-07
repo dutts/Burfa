@@ -11,7 +11,7 @@ namespace Burfa.Common
 
     public struct TurnResult
     {
-        bool IsValid;
-        GameState State;
+        public bool IsValid;
+        public GameState State;
     }
 }

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burfa.Common", "Burfa.Commo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burtfa.Common.Tests", "Burtfa.Common.Tests\Burtfa.Common.Tests.csproj", "{6E970763-F058-42B3-AD17-B6DE7603FFFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burfa.Console", "Burfa.Console\Burfa.Console.csproj", "{266C3A23-48D4-4BD0-BE82-86E27E8EF1A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burfa.ConsoleGame", "Burfa.ConsoleGame\Burfa.ConsoleGame.csproj", "{266C3A23-48D4-4BD0-BE82-86E27E8EF1A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

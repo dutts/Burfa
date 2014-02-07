@@ -7,8 +7,8 @@
     <ProjectGuid>{266C3A23-48D4-4BD0-BE82-86E27E8EF1A4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Burfa.Console</RootNamespace>
-    <AssemblyName>Burfa.Console</AssemblyName>
+    <RootNamespace>Burfa.ConsoleGame</RootNamespace>
+    <AssemblyName>Burfa.ConsoleGame</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameBoardConsoleExtensions.cs" />
+    <Compile Include="GameEngineConsoleExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
