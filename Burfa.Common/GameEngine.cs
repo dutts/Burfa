@@ -37,6 +37,8 @@ namespace Burfa.Common
         {
             var result = new TurnResult() { IsValid = true, State = GameState.InPlay };
             //TODO
+            Board.SetSquare(x, y, player);
+            //TODO
             CurrentGameState = result.State;
             if (result.IsValid && CurrentGameState == GameState.InPlay) ToggleCurrentPlayer();
             return result;
