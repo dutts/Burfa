@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ninject;
 
 namespace Burfa.ConsoleGame
 {
@@ -11,17 +12,22 @@ namespace Burfa.ConsoleGame
     {
         static void Main(string[] args)
         {
-            var engine = new GameEngine();
-            engine.ToConsole();
-            while (true)
+            using (IKernel kernel = new StandardKernel())
             {
-                Console.WriteLine("Enter move as X,Y:");
-                var line = Console.ReadLine();
-                var coords = line.Split(',');
-                int x,y;
-                if (coords.Length != 2 || !TryParseCoords(coords, out x, out y)) break;
-                engine.TakeTurn(x,y);
+                kernel.Bind<IGameEngine>().To<GameEngine>().InSingletonScope();
+                kernel.Bind<IGameBoard>().To<GameBoard>().InSingletonScope();
+                var engine = kernel.Get<IGameEngine>();
                 engine.ToConsole();
+                while (true)
+                {
+                    Console.WriteLine("Enter move as X,Y:");
+                    var line = Console.ReadLine();
+                    var coords = line.Split(',');
+                    int x, y;
+                    if (coords.Length != 2 || !TryParseCoords(coords, out x, out y)) break;
+                    engine.TakeTurn(x, y);
+                    engine.ToConsole();
+                }
             }
         }
 

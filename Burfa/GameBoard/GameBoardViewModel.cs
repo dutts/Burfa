@@ -9,11 +9,11 @@ namespace Burfa.GameBoard
 {
     public class GameBoardViewModel : ViewModelBase// DependencyObject //todo: prism
     {
-        private GameEngine _gameEngine;
+        private IGameEngine _gameEngine;
 
-        public GameBoardViewModel()
+        public GameBoardViewModel(IGameEngine gameEngine)
         {
-            _gameEngine = new GameEngine();
+            _gameEngine = gameEngine;
         }
 
     }

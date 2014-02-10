@@ -7,7 +7,16 @@ using System.Threading.Tasks;
 
 namespace Burfa.Common
 {
-    public class GameBoard
+    public interface IGameBoard
+    {
+        int BoardEdgeLength { get; set; }
+        int GameBoardSquareCount { get; }
+        void Reset();
+        void SetSquare(int x, int y, Player player);
+        GameBoardSquare GetGameBoardSquare(int x, int y);
+    }
+
+    public class GameBoard : IGameBoard
     {
         private GameBoardSquare[] board;
         public int BoardEdgeLength { get; set; }

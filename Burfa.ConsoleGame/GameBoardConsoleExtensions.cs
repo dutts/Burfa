@@ -9,7 +9,7 @@ namespace Burfa.ConsoleGame
 {
     public static class GameBoardConsoleExtensions
     {
-        public static void ToConsole(this GameBoard gb)
+        public static void ToConsole(this IGameBoard gb)
         {
             Console.Clear();
             for (int i = 0; i < gb.BoardEdgeLength; i++)
