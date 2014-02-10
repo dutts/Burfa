@@ -6,9 +6,6 @@
              xmlns:gameboard="clr-namespace:Burfa.GameBoard"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.DataContext>
-        <gameboard:GameBoardViewModel/>
-    </UserControl.DataContext>
     <Grid>
             
     </Grid>

@@ -12,8 +12,9 @@ namespace Burfa.Common
         Player CurrentPlayer { get; }
         GameState CurrentGameState { get; }
         void Setup();
-        TurnResult TakeTurn(int x, int y);
-        TurnResult TakeTurn(Player player, int x, int y);
+        void TakeTurn(int x, int y);
+        void TakeTurn(Player player, int x, int y);
+        TurnResult LastTurnResult { get; }
         void Reset();
     }
 
@@ -27,14 +28,21 @@ namespace Burfa.Common
             }
         }
 
+        private TurnResult _lastTurnResult;
+        public TurnResult LastTurnResult
+        {
+            get { return _lastTurnResult; }
+        }
         public Player CurrentPlayer { get; set; }
         public GameState CurrentGameState { get; set; }
 
         private IGameBoard _gameBoard;
+        private IGameRules _gameRules;
 
-        public GameEngine(IGameBoard gameBoard)
+        public GameEngine(IGameBoard gameBoard, IGameRules gameRules)
         {
             _gameBoard = gameBoard;
+            _gameRules = gameRules;
             Reset();
             Setup();
         }
@@ -48,20 +56,23 @@ namespace Burfa.Common
             CurrentPlayer = Player.Black;
         }
 
-        public TurnResult TakeTurn(int x, int y)
+        public void TakeTurn(int x, int y)
         {
-            return TakeTurn(CurrentPlayer, x, y);
+            TakeTurn(CurrentPlayer, x, y);
         }
 
-        public TurnResult TakeTurn(Player player, int x, int y)
+        public void TakeTurn(Player player, int x, int y)
         {
-            var result = new TurnResult() { IsValid = true, State = GameState.InPlay };
-            //TODO
-            _gameBoard.SetSquare(x, y, player);
-            //TODO
-            CurrentGameState = result.State;
-            if (result.IsValid && CurrentGameState == GameState.InPlay) ToggleCurrentPlayer();
-            return result;
+            TurnResult result = new TurnResult() { IsValid = false, State = GameState.InPlay };
+
+            if (_gameRules.IsValidTurn(player, x, y))
+            {
+                result = new TurnResult() { IsValid = true, State = GameState.InPlay };
+                _gameBoard.SetSquare(x, y, player);
+                CurrentGameState = result.State;
+                if (result.IsValid && CurrentGameState == GameState.InPlay) ToggleCurrentPlayer();
+            }
+            _lastTurnResult = result;
         }
 
         public void Reset()

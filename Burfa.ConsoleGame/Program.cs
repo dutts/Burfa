@@ -14,6 +14,7 @@ namespace Burfa.ConsoleGame
         {
             using (IKernel kernel = new StandardKernel())
             {
+                kernel.Bind<IGameRules>().To<GameRules>().InSingletonScope();
                 kernel.Bind<IGameEngine>().To<GameEngine>().InSingletonScope();
                 kernel.Bind<IGameBoard>().To<GameBoard>().InSingletonScope();
                 var engine = kernel.Get<IGameEngine>();
