@@ -13,12 +13,15 @@ namespace Burfa.Common
         int GameBoardSquareCount { get; }
         void Reset();
         void SetSquare(int x, int y, Player player);
+        GameBoardSquare[] GetRow(int y);
+        GameBoardSquare[] GetColumn(int x);
         GameBoardSquare GetGameBoardSquare(int x, int y);
     }
 
     public class GameBoard : IGameBoard
     {
         private GameBoardSquare[] board;
+          
         public int BoardEdgeLength { get; set; }
 
         public int GameBoardSquareCount
@@ -58,15 +61,30 @@ namespace Burfa.Common
             if (x > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("x value of " + x + " is larger than board edge length (" + BoardEdgeLength + ")");
             if (y > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("y value of " + x + " is larger than board edge length (" + BoardEdgeLength + ")");
 
-            board[(x * BoardEdgeLength) + y].Set(player);
+            board[(y * BoardEdgeLength) + x].Set(player);
+        }
+
+        public GameBoardSquare[] GetRow(int y)
+        {
+           return new ArraySegment<GameBoardSquare>(board, y * BoardEdgeLength, BoardEdgeLength).ToArray();
+        }
+
+        public GameBoardSquare[] GetColumn(int x)
+        {
+            var squareList = new List<GameBoardSquare>();
+            for (int i = 0; i < BoardEdgeLength; i++)
+            {
+                squareList.Add(GetGameBoardSquare(x, i));
+            }
+            return squareList.ToArray();
         }
 
         public GameBoardSquare GetGameBoardSquare(int x, int y)
         {
             if (x > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("x value of " + x + " is larger than board edge length (" + BoardEdgeLength + ")");
-            if (y > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("y value of " + x + " is larger than board edge length (" + BoardEdgeLength + ")");
+            if (y > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("y value of " + y + " is larger than board edge length (" + BoardEdgeLength + ")");
 
-            return board[(x * BoardEdgeLength) + y];
+            return board[(y * BoardEdgeLength) + x];
         }
     }
 }

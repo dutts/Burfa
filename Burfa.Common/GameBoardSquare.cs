@@ -38,5 +38,20 @@ namespace Burfa.Common
         {
             State = default(Player);
         }
+
+        public bool BelongsTo(Player player)
+        {
+            return (State == player);
+        }
+
+        public bool DoesNotBelongTo(Player player)
+        {
+            return (State != player);
+        }
+
+        public bool IsEmpty()
+        {
+            return (State == null);
+        }
     }
 }
