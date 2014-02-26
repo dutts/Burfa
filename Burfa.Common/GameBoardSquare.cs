@@ -49,9 +49,19 @@ namespace Burfa.Common
             return (State != player);
         }
 
+        public bool DoesNotBelongToAndIsNotEmpty(Player player)
+        {
+            return (State != null && State != player);
+        }
+
         public bool IsEmpty()
         {
             return (State == null);
+        }
+
+        public override string ToString()
+        {
+            return State + "x" + X + " y" + Y;
         }
     }
 }

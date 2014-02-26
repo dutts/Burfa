@@ -30,22 +30,39 @@ namespace Burfa.Common
 
         public bool IsValidTurn(Player player, int x, int y)
         {
-            bool upValid = true;
-            bool downValid = true;
-            bool leftValid = true;
-            bool rightValid = true;
+            bool upDownValid = IsValidInSequence(player, _board.GetColumn(x), y);
+            bool leftRightValid = IsValidInSequence(player, _board.GetRow(y), x);
 
-            return upValid || downValid || leftValid || rightValid;
+            return upDownValid || leftRightValid;
         }
 
-        private bool IsValidInDirection(Player player, int x, int y, SearchDirection direction)
+        public static bool IsValidInSequence(Player player, GameBoardSquare[] squareSeq, int turnPos)
         {
             bool isValid = true;
-            //var squares = GetSquaresInDirectionFromStartSquare(x, y, direction);
-            //foreach (var square in squares)
-            //{
-            //    if 
-            //}
+            
+            // Handle white space on both sides, invalid
+            if ((turnPos > 0 && squareSeq[turnPos - 1].IsEmpty()) && (turnPos < squareSeq.Length && squareSeq[turnPos + 1].IsEmpty()))
+                return false;
+
+            // Handle after turnPos in sequence
+            var isValidAfter = SeekOverOtherPlayerToThisPlayer(player, new ArraySegment<GameBoardSquare>(squareSeq, turnPos + 1, squareSeq.Length - turnPos - 1).ToArray());
+            var isValidBefore = SeekOverOtherPlayerToThisPlayer(player, new ArraySegment<GameBoardSquare>(squareSeq, 0, turnPos).Reverse().ToArray());
+
+            return isValidBefore || isValidAfter;
+        }
+
+        private static bool SeekOverOtherPlayerToThisPlayer(Player thisPlayer, GameBoardSquare[] squareSeq)
+        {
+            var isValid = false;
+            for (int i = 0; i < squareSeq.Length; i++)
+            {
+                if (squareSeq[i].DoesNotBelongToAndIsNotEmpty(thisPlayer))
+                {
+                    isValid = true;
+                }
+                if (!isValid) break;
+            }
+
             return isValid;
         }
 
