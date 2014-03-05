@@ -16,6 +16,8 @@ namespace Burfa.Common
         GameBoardSquare[] GetRow(int y);
         GameBoardSquare[] GetColumn(int x);
         GameBoardSquare GetGameBoardSquare(int x, int y);
+
+        void SetSquaresFromTurnPos(int x, int y, Player player, ValidOrientation validOrientation);
     }
 
     public class GameBoard : IGameBoard
@@ -85,6 +87,32 @@ namespace Burfa.Common
             if (y > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("y value of " + y + " is larger than board edge length (" + BoardEdgeLength + ")");
 
             return board[(y * BoardEdgeLength) + x];
+        }
+
+
+        public void SetSquaresFromTurnPos(int x, int y, Player player, ValidOrientation validOrientation)
+        {
+            if (validOrientation == ValidOrientation.Both || validOrientation == ValidOrientation.Horizontal)
+            {
+                SetSquaresToPlayerInSequence(new ArraySegment<GameBoardSquare>(GetRow(y), x + 1, BoardEdgeLength - x - 1).ToArray(), player);
+                SetSquaresToPlayerInSequence(new ArraySegment<GameBoardSquare>(GetRow(y), 0, x).Reverse().ToArray(), player);
+            }
+            if (validOrientation == ValidOrientation.Both || validOrientation == ValidOrientation.Vertical)
+            {
+                SetSquaresToPlayerInSequence(new ArraySegment<GameBoardSquare>(GetColumn(x), y + 1, BoardEdgeLength - y - 1).ToArray(), player);
+                SetSquaresToPlayerInSequence(new ArraySegment<GameBoardSquare>(GetColumn(x), 0, y).Reverse().ToArray(), player);
+            }
+        }
+
+        private void SetSquaresToPlayerInSequence(GameBoardSquare[] squares, Player player)
+        {
+            foreach (var square in squares)
+            {
+                if (square.DoesNotBelongToAndIsNotEmpty(player))
+                    square.Set(player);
+                else
+                    break;
+            }
         }
     }
 }

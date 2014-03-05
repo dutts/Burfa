@@ -65,9 +65,11 @@ namespace Burfa.Common
         {
             TurnResult result = new TurnResult() { IsValid = false, State = GameState.InPlay };
 
-            if (_gameRules.IsValidTurn(player, x, y))
+            var validOrientation = _gameRules.IsValidTurn(player, x, y);
+            if (validOrientation != ValidOrientation.None)
             {
                 result = new TurnResult() { IsValid = true, State = GameState.InPlay };
+                _gameBoard.SetSquaresFromTurnPos(x, y, player, validOrientation);
                 _gameBoard.SetSquare(x, y, player);
                 CurrentGameState = result.State;
                 if (result.IsValid && CurrentGameState == GameState.InPlay) ToggleCurrentPlayer();

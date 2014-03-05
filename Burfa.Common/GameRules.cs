@@ -8,15 +8,15 @@ namespace Burfa.Common
 {
     public interface IGameRules
     {
-        bool IsValidTurn(Player player, int x, int y);
+        ValidOrientation IsValidTurn(Player player, int x, int y);
     }
 
-    enum SearchDirection
+    public enum ValidOrientation
     {
-        Up,
-        Down,
-        Left,
-        Right
+        None,
+        Vertical,
+        Horizontal,
+        Both
     }
 
     public class GameRules : IGameRules
@@ -28,12 +28,15 @@ namespace Burfa.Common
             _board = board;
         }
 
-        public bool IsValidTurn(Player player, int x, int y)
+        public ValidOrientation IsValidTurn(Player player, int x, int y)
         {
             bool upDownValid = IsValidInSequence(player, _board.GetColumn(x), y);
             bool leftRightValid = IsValidInSequence(player, _board.GetRow(y), x);
 
-            return upDownValid || leftRightValid;
+            if (upDownValid && leftRightValid) return ValidOrientation.Both;
+            if (upDownValid) return ValidOrientation.Vertical;
+            if (leftRightValid) return ValidOrientation.Horizontal;
+            return ValidOrientation.None;
         }
 
         public static bool IsValidInSequence(Player player, GameBoardSquare[] squareSeq, int turnPos)
@@ -54,15 +57,20 @@ namespace Burfa.Common
         private static bool SeekOverOtherPlayerToThisPlayer(Player thisPlayer, GameBoardSquare[] squareSeq)
         {
             var isValid = false;
+            var foundSquaresToTake = false;
+
             for (int i = 0; i < squareSeq.Length; i++)
             {
                 if (squareSeq[i].DoesNotBelongToAndIsNotEmpty(thisPlayer))
                 {
+                    foundSquaresToTake = true;
+                }
+                if (foundSquaresToTake && squareSeq[i].BelongsTo(thisPlayer))
+                {
                     isValid = true;
                 }
-                if (!isValid) break;
+                if (!foundSquaresToTake) break;
             }
-
             return isValid;
         }
 

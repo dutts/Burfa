@@ -63,6 +63,27 @@ namespace Burtfa.Common.Tests
         }
 
         [TestMethod]
+        public void IsValidInSequence__00000XWB_BlackMoveX__ReturnsTrue()
+        {
+            _testSequence[7].SetBlack();
+            _testSequence[6].SetWhite();
+
+            var isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 5);
+            Assert.IsTrue(isValid);
+        }
+
+        [TestMethod]
+        public void IsValidInSequence__00000XWB_WhiteMoveX__ReturnsFalse()
+        {
+            _testSequence[7].SetBlack();
+            _testSequence[6].SetWhite();
+
+            var isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 5);
+            Assert.IsFalse(isValid);
+        }
+
+
+        [TestMethod]
         public void IsValidInSequence__000XWB00_BlackMoveX__ReturnsTrue()
         {
             _testSequence[4].SetWhite();
@@ -77,6 +98,17 @@ namespace Burtfa.Common.Tests
         {
             _testSequence[4].SetWhite();
             _testSequence[5].SetBlack();
+
+            var isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 3);
+            Assert.IsFalse(isValid);
+        }
+
+        [TestMethod]
+        public void IsValidInSequence__000XWBW0_WhiteMoveX__ReturnsFalse()
+        {
+            _testSequence[4].SetWhite();
+            _testSequence[5].SetBlack();
+            _testSequence[6].SetWhite();
 
             var isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 3);
             Assert.IsFalse(isValid);
