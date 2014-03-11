@@ -13,6 +13,8 @@ namespace Burfa.Common
         int GameBoardSquareCount { get; }
         void Reset();
         void SetSquare(int x, int y, Player player);
+        bool Completed { get; }
+        int GetPlayerScore(Player player);
         GameBoardSquare[] GetRow(int y);
         GameBoardSquare[] GetColumn(int x);
         GameBoardSquare GetGameBoardSquare(int x, int y);
@@ -31,6 +33,14 @@ namespace Burfa.Common
             get
             {
                 return BoardEdgeLength * BoardEdgeLength;
+            }
+        }
+
+        public bool Completed
+        {
+            get
+            {
+                return board.All(s => !s.IsEmpty());
             }
         }
 
@@ -56,6 +66,11 @@ namespace Burfa.Common
             {
                 board[i] = new GameBoardSquare() { X = i % BoardEdgeLength, Y = Math.Abs(i/BoardEdgeLength) };
             }
+        }
+
+        public int GetPlayerScore(Player player)
+        {
+            return board.Count(s => s.BelongsTo(player));
         }
 
         public void SetSquare(int x, int y, Player player)

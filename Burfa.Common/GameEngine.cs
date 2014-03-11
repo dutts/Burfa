@@ -68,7 +68,8 @@ namespace Burfa.Common
             var validOrientation = _gameRules.IsValidTurn(player, x, y);
             if (validOrientation != ValidOrientation.None)
             {
-                result = new TurnResult() { IsValid = true, State = GameState.InPlay };
+                
+                result = new TurnResult() { IsValid = true, State = CurrentGameState };
                 _gameBoard.SetSquaresFromTurnPos(x, y, player, validOrientation);
                 _gameBoard.SetSquare(x, y, player);
                 CurrentGameState = result.State;

@@ -90,5 +90,19 @@ namespace Burfa.Common
             }
             return retVal;
         }
+
+        public GameState GetGameState()
+        {
+            var retVal = GameState.InPlay;
+            if (_board.Completed)
+            {
+                var blackScore = _board.GetPlayerScore(Player.Black);
+                var whiteScore = _board.GetPlayerScore(Player.White);
+                if (blackScore == whiteScore) retVal = GameState.Draw;
+                else if (blackScore > whiteScore) retVal = GameState.WinBlack;
+                else if (whiteScore < blackScore) retVal = GameState.WinWhite;
+            }
+            return retVal;
+        }
     }
 }

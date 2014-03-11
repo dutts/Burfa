@@ -75,5 +75,42 @@ namespace Burtfa.Common.Tests
                 }
             }
         }
+
+        [TestMethod]
+        public void Completed__CompleteBoard__ReturnsTrue()
+        {
+            var boardEdgeLength = 2;
+            var gameBoard = new GameBoard(boardEdgeLength);
+            for (int columnNum = 0; columnNum < boardEdgeLength; columnNum++)
+            {
+                for (int rowNum = 0; rowNum < boardEdgeLength; rowNum++)
+                {
+                    gameBoard.SetSquare(columnNum, rowNum, (rowNum % 2 == 0) ? Player.Black : Player.White);
+                }
+            }
+
+            Assert.IsTrue(gameBoard.Completed);
+        }
+
+        [TestMethod]
+        public void Completed__PartialBoard__ReturnsFalse()
+        {
+            var boardEdgeLength = 2;
+            var gameBoard = new GameBoard(boardEdgeLength);
+            for (int rowNum = 0; rowNum < boardEdgeLength; rowNum++)
+            {
+                gameBoard.SetSquare(1, rowNum, (rowNum % 2 == 0) ? Player.Black : Player.White);
+            }
+            Assert.IsFalse(gameBoard.Completed);
+        }
+
+        [TestMethod]
+        public void GetPLayerScore__Black1White0_Black1White0()
+        {
+            var gameBoard = new GameBoard(8);
+            gameBoard.SetSquare(0, 0, Player.Black);
+            Assert.Equals(1, gameBoard.GetPlayerScore(Player.Black));
+            Assert.Equals(0, gameBoard.GetPlayerScore(Player.White));
+        }
     }
 }
