@@ -104,7 +104,7 @@ namespace Burtfa.Common.Tests
         }
 
         [TestMethod]
-        public void GetPLayerScore__Black1White0_Black1White0()
+        public void GetPlayerScore__Black1White0_Black1White0()
         {
             var gameBoard = new GameBoard(8);
             gameBoard.SetSquare(0, 0, Player.Black);
