@@ -1,13 +1,9 @@
-﻿using Burfa.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Burfa.Common;
 
 namespace Burfa.Bots
 {
-    interface IBurfaBot
+    internal interface IBurfaBot
     {
         IList<GameBoardSquare> SubmitTurnGetResponse(IList<GameBoardSquare> otherPlayerTurn);
     }

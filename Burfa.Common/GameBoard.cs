@@ -1,9 +1,7 @@
-﻿using Burfa.Common.Exceptions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Burfa.Common.Exceptions;
 
 namespace Burfa.Common
 {
@@ -11,9 +9,9 @@ namespace Burfa.Common
     {
         int BoardEdgeLength { get; set; }
         int GameBoardSquareCount { get; }
+        bool Completed { get; }
         void Reset();
         void SetSquare(int x, int y, Player player);
-        bool Completed { get; }
         int GetPlayerScore(Player player);
         GameBoardSquare[] GetRow(int y);
         GameBoardSquare[] GetColumn(int x);
@@ -25,29 +23,23 @@ namespace Burfa.Common
     public class GameBoard : IGameBoard
     {
         private GameBoardSquare[] board;
-          
-        public int BoardEdgeLength { get; set; }
-
-        public int GameBoardSquareCount
-        {
-            get
-            {
-                return BoardEdgeLength * BoardEdgeLength;
-            }
-        }
-
-        public bool Completed
-        {
-            get
-            {
-                return board.All(s => !s.IsEmpty());
-            }
-        }
 
         public GameBoard(int boardEdgeLength = 8)
         {
             BoardEdgeLength = boardEdgeLength;
             Reset();
+        }
+
+        public int BoardEdgeLength { get; set; }
+
+        public int GameBoardSquareCount
+        {
+            get { return BoardEdgeLength*BoardEdgeLength; }
+        }
+
+        public bool Completed
+        {
+            get { return board.All(s => !s.IsEmpty()); }
         }
 
         /*
@@ -64,7 +56,7 @@ namespace Burfa.Common
             board = new GameBoardSquare[GameBoardSquareCount];
             for (int i = 0; i < GameBoardSquareCount; i++)
             {
-                board[i] = new GameBoardSquare() { X = i % BoardEdgeLength, Y = Math.Abs(i/BoardEdgeLength) };
+                board[i] = new GameBoardSquare {X = i%BoardEdgeLength, Y = Math.Abs(i/BoardEdgeLength)};
             }
         }
 
@@ -75,15 +67,19 @@ namespace Burfa.Common
 
         public void SetSquare(int x, int y, Player player)
         {
-            if (x > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("x value of " + x + " is larger than board edge length (" + BoardEdgeLength + ")");
-            if (y > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("y value of " + x + " is larger than board edge length (" + BoardEdgeLength + ")");
+            if (x > BoardEdgeLength - 1)
+                throw new BoardIndexOutOfRangeException("x value of " + x + " is larger than board edge length (" +
+                                                        BoardEdgeLength + ")");
+            if (y > BoardEdgeLength - 1)
+                throw new BoardIndexOutOfRangeException("y value of " + x + " is larger than board edge length (" +
+                                                        BoardEdgeLength + ")");
 
-            board[(y * BoardEdgeLength) + x].Set(player);
+            board[(y*BoardEdgeLength) + x].Set(player);
         }
 
         public GameBoardSquare[] GetRow(int y)
         {
-           return new ArraySegment<GameBoardSquare>(board, y * BoardEdgeLength, BoardEdgeLength).ToArray();
+            return new ArraySegment<GameBoardSquare>(board, y*BoardEdgeLength, BoardEdgeLength).ToArray();
         }
 
         public GameBoardSquare[] GetColumn(int x)
@@ -98,10 +94,14 @@ namespace Burfa.Common
 
         public GameBoardSquare GetGameBoardSquare(int x, int y)
         {
-            if (x > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("x value of " + x + " is larger than board edge length (" + BoardEdgeLength + ")");
-            if (y > BoardEdgeLength - 1) throw new BoardIndexOutOfRangeException("y value of " + y + " is larger than board edge length (" + BoardEdgeLength + ")");
+            if (x > BoardEdgeLength - 1)
+                throw new BoardIndexOutOfRangeException("x value of " + x + " is larger than board edge length (" +
+                                                        BoardEdgeLength + ")");
+            if (y > BoardEdgeLength - 1)
+                throw new BoardIndexOutOfRangeException("y value of " + y + " is larger than board edge length (" +
+                                                        BoardEdgeLength + ")");
 
-            return board[(y * BoardEdgeLength) + x];
+            return board[(y*BoardEdgeLength) + x];
         }
 
 
@@ -109,19 +109,23 @@ namespace Burfa.Common
         {
             if (validOrientation == ValidOrientation.Both || validOrientation == ValidOrientation.Horizontal)
             {
-                SetSquaresToPlayerInSequence(new ArraySegment<GameBoardSquare>(GetRow(y), x + 1, BoardEdgeLength - x - 1).ToArray(), player);
-                SetSquaresToPlayerInSequence(new ArraySegment<GameBoardSquare>(GetRow(y), 0, x).Reverse().ToArray(), player);
+                SetSquaresToPlayerInSequence(
+                    new ArraySegment<GameBoardSquare>(GetRow(y), x + 1, BoardEdgeLength - x - 1).ToArray(), player);
+                SetSquaresToPlayerInSequence(new ArraySegment<GameBoardSquare>(GetRow(y), 0, x).Reverse().ToArray(),
+                    player);
             }
             if (validOrientation == ValidOrientation.Both || validOrientation == ValidOrientation.Vertical)
             {
-                SetSquaresToPlayerInSequence(new ArraySegment<GameBoardSquare>(GetColumn(x), y + 1, BoardEdgeLength - y - 1).ToArray(), player);
-                SetSquaresToPlayerInSequence(new ArraySegment<GameBoardSquare>(GetColumn(x), 0, y).Reverse().ToArray(), player);
+                SetSquaresToPlayerInSequence(
+                    new ArraySegment<GameBoardSquare>(GetColumn(x), y + 1, BoardEdgeLength - y - 1).ToArray(), player);
+                SetSquaresToPlayerInSequence(new ArraySegment<GameBoardSquare>(GetColumn(x), 0, y).Reverse().ToArray(),
+                    player);
             }
         }
 
         private void SetSquaresToPlayerInSequence(GameBoardSquare[] squares, Player player)
         {
-            foreach (var square in squares)
+            foreach (GameBoardSquare square in squares)
             {
                 if (square.DoesNotBelongToAndIsNotEmpty(player))
                     square.Set(player);

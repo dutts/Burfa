@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Burfa.Common
 {
@@ -21,7 +18,7 @@ namespace Burfa.Common
 
     public class GameRules : IGameRules
     {
-        private IGameBoard _board;
+        private readonly IGameBoard _board;
 
         public GameRules(IGameBoard board)
         {
@@ -42,22 +39,25 @@ namespace Burfa.Common
         public static bool IsValidInSequence(Player player, GameBoardSquare[] squareSeq, int turnPos)
         {
             bool isValid = true;
-            
+
             // Handle white space on both sides, invalid
-            if ((turnPos > 0 && squareSeq[turnPos - 1].IsEmpty()) && (turnPos < squareSeq.Length && squareSeq[turnPos + 1].IsEmpty()))
+            if ((turnPos > 0 && squareSeq[turnPos - 1].IsEmpty()) &&
+                (turnPos < squareSeq.Length && squareSeq[turnPos + 1].IsEmpty()))
                 return false;
 
             // Handle after turnPos in sequence
-            var isValidAfter = SeekOverOtherPlayerToThisPlayer(player, new ArraySegment<GameBoardSquare>(squareSeq, turnPos + 1, squareSeq.Length - turnPos - 1).ToArray());
-            var isValidBefore = SeekOverOtherPlayerToThisPlayer(player, new ArraySegment<GameBoardSquare>(squareSeq, 0, turnPos).Reverse().ToArray());
+            bool isValidAfter = SeekOverOtherPlayerToThisPlayer(player,
+                new ArraySegment<GameBoardSquare>(squareSeq, turnPos + 1, squareSeq.Length - turnPos - 1).ToArray());
+            bool isValidBefore = SeekOverOtherPlayerToThisPlayer(player,
+                new ArraySegment<GameBoardSquare>(squareSeq, 0, turnPos).Reverse().ToArray());
 
             return isValidBefore || isValidAfter;
         }
 
         private static bool SeekOverOtherPlayerToThisPlayer(Player thisPlayer, GameBoardSquare[] squareSeq)
         {
-            var isValid = false;
-            var foundSquaresToTake = false;
+            bool isValid = false;
+            bool foundSquaresToTake = false;
 
             for (int i = 0; i < squareSeq.Length; i++)
             {
@@ -96,8 +96,8 @@ namespace Burfa.Common
             var retVal = GameState.InPlay;
             if (_board.Completed)
             {
-                var blackScore = _board.GetPlayerScore(Player.Black);
-                var whiteScore = _board.GetPlayerScore(Player.White);
+                int blackScore = _board.GetPlayerScore(Player.Black);
+                int whiteScore = _board.GetPlayerScore(Player.White);
                 if (blackScore == whiteScore) retVal = GameState.Draw;
                 else if (blackScore > whiteScore) retVal = GameState.WinBlack;
                 else if (whiteScore < blackScore) retVal = GameState.WinWhite;

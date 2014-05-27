@@ -1,16 +1,12 @@
-﻿using Burfa.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Burfa.Common;
 using Ninject;
 
 namespace Burfa.ConsoleGame
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             using (IKernel kernel = new StandardKernel())
             {
@@ -22,8 +18,8 @@ namespace Burfa.ConsoleGame
                 while (true)
                 {
                     Console.WriteLine("Enter move as X,Y:");
-                    var line = Console.ReadLine();
-                    var coords = line.Split(',');
+                    string line = Console.ReadLine();
+                    string[] coords = line.Split(',');
                     int x, y;
                     if (coords.Length != 2 || !TryParseCoords(coords, out x, out y)) break;
                     engine.TakeTurn(x, y);
@@ -36,7 +32,7 @@ namespace Burfa.ConsoleGame
         {
             int tryX = -1;
             int tryY = -1;
-            var result = (int.TryParse(coords[0], out tryX) && int.TryParse(coords[1], out tryY));
+            bool result = (int.TryParse(coords[0], out tryX) && int.TryParse(coords[1], out tryY));
             x = tryX;
             y = tryY;
             return result;

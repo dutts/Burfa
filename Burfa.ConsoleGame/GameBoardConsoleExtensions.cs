@@ -1,9 +1,5 @@
-﻿using Burfa.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Burfa.Common;
 
 namespace Burfa.ConsoleGame
 {
@@ -36,10 +32,10 @@ namespace Burfa.ConsoleGame
                 for (int j = 0; j < gb.BoardEdgeLength; j++)
                 {
                     Console.Write("| ");
-                    var gameSquare = gb.GetGameBoardSquare(j, i);
+                    GameBoardSquare gameSquare = gb.GetGameBoardSquare(j, i);
                     Console.Write(gameSquare.State == null ? " " : gameSquare.State == Player.Black ? "B" : "W");
                     Console.Write(" ");
-                    
+
                     if (j == gb.BoardEdgeLength - 1) Console.WriteLine("|");
                 }
                 for (int j = 0; j < gb.BoardEdgeLength; j++)

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Burfa.Common;
+﻿using Burfa.Common;
 
 namespace Burfa.GameBoard
 {
-    public class GameBoardViewModel : ViewModelBase// DependencyObject //todo: prism
+    public class GameBoardViewModel : ViewModelBase // DependencyObject //todo: prism
     {
         private IGameEngine _gameEngine;
 
@@ -15,6 +10,5 @@ namespace Burfa.GameBoard
         {
             _gameEngine = gameEngine;
         }
-
     }
 }

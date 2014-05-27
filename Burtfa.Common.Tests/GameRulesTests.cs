@@ -1,15 +1,14 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Burfa.Common;
+﻿using Burfa.Common;
 using FakeItEasy;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Burtfa.Common.Tests
 {
     [TestClass]
     public class GameRulesTests
     {
-        private GameBoardSquare[] _testSequence;
         private GameRules _gameRules;
+        private GameBoardSquare[] _testSequence;
 
         [TestInitialize]
         public void Setup()
@@ -28,7 +27,7 @@ namespace Burtfa.Common.Tests
             _testSequence[0].SetBlack();
             _testSequence[1].SetWhite();
 
-            var isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 2);
+            bool isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 2);
             Assert.IsTrue(isValid);
         }
 
@@ -38,7 +37,7 @@ namespace Burtfa.Common.Tests
             _testSequence[0].SetBlack();
             _testSequence[1].SetWhite();
 
-            var isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 2);
+            bool isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 2);
             Assert.IsFalse(isValid);
         }
 
@@ -48,7 +47,7 @@ namespace Burtfa.Common.Tests
             _testSequence[0].SetBlack();
             _testSequence[1].SetWhite();
 
-            var isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 3);
+            bool isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 3);
             Assert.IsFalse(isValid);
         }
 
@@ -58,7 +57,7 @@ namespace Burtfa.Common.Tests
             _testSequence[0].SetBlack();
             _testSequence[1].SetWhite();
 
-            var isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 3);
+            bool isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 3);
             Assert.IsFalse(isValid);
         }
 
@@ -68,7 +67,7 @@ namespace Burtfa.Common.Tests
             _testSequence[7].SetBlack();
             _testSequence[6].SetWhite();
 
-            var isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 5);
+            bool isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 5);
             Assert.IsTrue(isValid);
         }
 
@@ -78,7 +77,7 @@ namespace Burtfa.Common.Tests
             _testSequence[7].SetBlack();
             _testSequence[6].SetWhite();
 
-            var isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 5);
+            bool isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 5);
             Assert.IsFalse(isValid);
         }
 
@@ -88,8 +87,8 @@ namespace Burtfa.Common.Tests
         {
             _testSequence[4].SetWhite();
             _testSequence[5].SetBlack();
-           
-            var isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 3);
+
+            bool isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 3);
             Assert.IsTrue(isValid);
         }
 
@@ -99,7 +98,7 @@ namespace Burtfa.Common.Tests
             _testSequence[4].SetWhite();
             _testSequence[5].SetBlack();
 
-            var isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 3);
+            bool isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 3);
             Assert.IsFalse(isValid);
         }
 
@@ -110,7 +109,7 @@ namespace Burtfa.Common.Tests
             _testSequence[5].SetBlack();
             _testSequence[6].SetWhite();
 
-            var isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 3);
+            bool isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 3);
             Assert.IsFalse(isValid);
         }
     }

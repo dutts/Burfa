@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Burfa.Common
+﻿namespace Burfa.Common
 {
     public class GameBoardSquare
     {
         #region Logic Testing
+
         public int X { get; set; }
         public int Y { get; set; }
+
         #endregion
 
-        public Player? State
-        {
-            get;
-            private set;
-        }
+        public Player? State { get; private set; }
 
         public void SetBlack()
         {

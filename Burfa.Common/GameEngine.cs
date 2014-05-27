@@ -1,43 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Burfa.Common
+﻿namespace Burfa.Common
 {
     public interface IGameEngine
     {
         IGameBoard Board { get; }
         Player CurrentPlayer { get; }
         GameState CurrentGameState { get; }
+        TurnResult LastTurnResult { get; }
         void Setup();
         void TakeTurn(int x, int y);
         void TakeTurn(Player player, int x, int y);
-        TurnResult LastTurnResult { get; }
         void Reset();
     }
 
     public class GameEngine : IGameEngine
     {
-        public IGameBoard Board
-        {
-            get
-            {
-                return _gameBoard;
-            }
-        }
-
+        private readonly IGameBoard _gameBoard;
+        private readonly IGameRules _gameRules;
         private TurnResult _lastTurnResult;
-        public TurnResult LastTurnResult
-        {
-            get { return _lastTurnResult; }
-        }
-        public Player CurrentPlayer { get; set; }
-        public GameState CurrentGameState { get; set; }
-
-        private IGameBoard _gameBoard;
-        private IGameRules _gameRules;
 
         public GameEngine(IGameBoard gameBoard, IGameRules gameRules)
         {
@@ -46,6 +25,19 @@ namespace Burfa.Common
             Reset();
             Setup();
         }
+
+        public IGameBoard Board
+        {
+            get { return _gameBoard; }
+        }
+
+        public TurnResult LastTurnResult
+        {
+            get { return _lastTurnResult; }
+        }
+
+        public Player CurrentPlayer { get; set; }
+        public GameState CurrentGameState { get; set; }
 
         public void Setup()
         {
@@ -63,13 +55,12 @@ namespace Burfa.Common
 
         public void TakeTurn(Player player, int x, int y)
         {
-            TurnResult result = new TurnResult() { IsValid = false, State = GameState.InPlay };
+            var result = new TurnResult {IsValid = false, State = GameState.InPlay};
 
-            var validOrientation = _gameRules.IsValidTurn(player, x, y);
+            ValidOrientation validOrientation = _gameRules.IsValidTurn(player, x, y);
             if (validOrientation != ValidOrientation.None)
             {
-                
-                result = new TurnResult() { IsValid = true, State = CurrentGameState };
+                result = new TurnResult {IsValid = true, State = CurrentGameState};
                 _gameBoard.SetSquaresFromTurnPos(x, y, player, validOrientation);
                 _gameBoard.SetSquare(x, y, player);
                 CurrentGameState = result.State;
