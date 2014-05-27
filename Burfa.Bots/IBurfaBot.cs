@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using Burfa.Common;
+using Burfa.Common.Board;
 
 namespace Burfa.Bots
 {
     internal interface IBurfaBot
     {
-        IList<GameBoardSquare> SubmitTurnGetResponse(IList<GameBoardSquare> otherPlayerTurn);
+        IList<BoardSquare> SubmitTurnGetResponse(IList<BoardSquare> otherPlayerTurn);
     }
 }

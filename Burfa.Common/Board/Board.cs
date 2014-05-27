@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Burfa.Common.Engine;
 using Burfa.Common.Exceptions;
 
-namespace Burfa.Common
+namespace Burfa.Common.Board
 {
     public interface IGameBoard
     {
@@ -13,18 +14,18 @@ namespace Burfa.Common
         void Reset();
         void SetSquare(int x, int y, Player player);
         int GetPlayerScore(Player player);
-        GameBoardSquare[] GetRow(int y);
-        GameBoardSquare[] GetColumn(int x);
-        GameBoardSquare GetGameBoardSquare(int x, int y);
+        BoardSquare[] GetRow(int y);
+        BoardSquare[] GetColumn(int x);
+        BoardSquare GetGameBoardSquare(int x, int y);
 
         void SetSquaresFromTurnPos(int x, int y, Player player, ValidOrientation validOrientation);
     }
 
-    public class GameBoard : IGameBoard
+    public class Board : IGameBoard
     {
-        private GameBoardSquare[] board;
+        private BoardSquare[] _board;
 
-        public GameBoard(int boardEdgeLength = 8)
+        public Board(int boardEdgeLength = 8)
         {
             BoardEdgeLength = boardEdgeLength;
             Reset();
@@ -39,7 +40,7 @@ namespace Burfa.Common
 
         public bool Completed
         {
-            get { return board.All(s => !s.IsEmpty()); }
+            get { return _board.All(s => !s.IsEmpty()); }
         }
 
         /*
@@ -53,16 +54,16 @@ namespace Burfa.Common
 
         public void Reset()
         {
-            board = new GameBoardSquare[GameBoardSquareCount];
+            _board = new BoardSquare[GameBoardSquareCount];
             for (int i = 0; i < GameBoardSquareCount; i++)
             {
-                board[i] = new GameBoardSquare {X = i%BoardEdgeLength, Y = Math.Abs(i/BoardEdgeLength)};
+                _board[i] = new BoardSquare {X = i%BoardEdgeLength, Y = Math.Abs(i/BoardEdgeLength)};
             }
         }
 
         public int GetPlayerScore(Player player)
         {
-            return board.Count(s => s.BelongsTo(player));
+            return _board.Count(s => s.BelongsTo(player));
         }
 
         public void SetSquare(int x, int y, Player player)
@@ -74,17 +75,17 @@ namespace Burfa.Common
                 throw new BoardIndexOutOfRangeException("y value of " + x + " is larger than board edge length (" +
                                                         BoardEdgeLength + ")");
 
-            board[(y*BoardEdgeLength) + x].Set(player);
+            _board[(y*BoardEdgeLength) + x].Set(player);
         }
 
-        public GameBoardSquare[] GetRow(int y)
+        public BoardSquare[] GetRow(int y)
         {
-            return new ArraySegment<GameBoardSquare>(board, y*BoardEdgeLength, BoardEdgeLength).ToArray();
+            return new ArraySegment<BoardSquare>(_board, y*BoardEdgeLength, BoardEdgeLength).ToArray();
         }
 
-        public GameBoardSquare[] GetColumn(int x)
+        public BoardSquare[] GetColumn(int x)
         {
-            var squareList = new List<GameBoardSquare>();
+            var squareList = new List<BoardSquare>();
             for (int i = 0; i < BoardEdgeLength; i++)
             {
                 squareList.Add(GetGameBoardSquare(x, i));
@@ -92,7 +93,7 @@ namespace Burfa.Common
             return squareList.ToArray();
         }
 
-        public GameBoardSquare GetGameBoardSquare(int x, int y)
+        public BoardSquare GetGameBoardSquare(int x, int y)
         {
             if (x > BoardEdgeLength - 1)
                 throw new BoardIndexOutOfRangeException("x value of " + x + " is larger than board edge length (" +
@@ -101,7 +102,7 @@ namespace Burfa.Common
                 throw new BoardIndexOutOfRangeException("y value of " + y + " is larger than board edge length (" +
                                                         BoardEdgeLength + ")");
 
-            return board[(y*BoardEdgeLength) + x];
+            return _board[(y*BoardEdgeLength) + x];
         }
 
 
@@ -110,22 +111,22 @@ namespace Burfa.Common
             if (validOrientation == ValidOrientation.Both || validOrientation == ValidOrientation.Horizontal)
             {
                 SetSquaresToPlayerInSequence(
-                    new ArraySegment<GameBoardSquare>(GetRow(y), x + 1, BoardEdgeLength - x - 1).ToArray(), player);
-                SetSquaresToPlayerInSequence(new ArraySegment<GameBoardSquare>(GetRow(y), 0, x).Reverse().ToArray(),
+                    new ArraySegment<BoardSquare>(GetRow(y), x + 1, BoardEdgeLength - x - 1).ToArray(), player);
+                SetSquaresToPlayerInSequence(new ArraySegment<BoardSquare>(GetRow(y), 0, x).Reverse().ToArray(),
                     player);
             }
             if (validOrientation == ValidOrientation.Both || validOrientation == ValidOrientation.Vertical)
             {
                 SetSquaresToPlayerInSequence(
-                    new ArraySegment<GameBoardSquare>(GetColumn(x), y + 1, BoardEdgeLength - y - 1).ToArray(), player);
-                SetSquaresToPlayerInSequence(new ArraySegment<GameBoardSquare>(GetColumn(x), 0, y).Reverse().ToArray(),
+                    new ArraySegment<BoardSquare>(GetColumn(x), y + 1, BoardEdgeLength - y - 1).ToArray(), player);
+                SetSquaresToPlayerInSequence(new ArraySegment<BoardSquare>(GetColumn(x), 0, y).Reverse().ToArray(),
                     player);
             }
         }
 
-        private void SetSquaresToPlayerInSequence(GameBoardSquare[] squares, Player player)
+        private void SetSquaresToPlayerInSequence(IEnumerable<BoardSquare> squares, Player player)
         {
-            foreach (GameBoardSquare square in squares)
+            foreach (var square in squares)
             {
                 if (square.DoesNotBelongToAndIsNotEmpty(player))
                     square.Set(player);

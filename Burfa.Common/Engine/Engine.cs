@@ -1,4 +1,6 @@
-﻿namespace Burfa.Common
+﻿using Burfa.Common.Board;
+
+namespace Burfa.Common.Engine
 {
     public interface IGameEngine
     {
@@ -12,14 +14,15 @@
         void Reset();
     }
 
-    public class GameEngine : IGameEngine
+    public class Engine : IGameEngine
     {
         private readonly IGameBoard _gameBoard;
         private readonly IGameRules _gameRules;
         private TurnResult _lastTurnResult;
 
-        public GameEngine(IGameBoard gameBoard, IGameRules gameRules)
+        public Engine(IGameBoard gameBoard, IGameRules gameRules)
         {
+            _lastTurnResult = new TurnResult {IsValid = true, State = GameState.Initial};
             _gameBoard = gameBoard;
             _gameRules = gameRules;
             Reset();

@@ -1,4 +1,4 @@
-﻿namespace Burfa.Common
+﻿namespace Burfa.Common.Engine
 {
     public enum Player
     {

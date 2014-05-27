@@ -1,6 +1,8 @@
-﻿namespace Burfa.Common
+﻿using Burfa.Common.Engine;
+
+namespace Burfa.Common.Board
 {
-    public class GameBoardSquare
+    public class BoardSquare
     {
         #region Logic Testing
 

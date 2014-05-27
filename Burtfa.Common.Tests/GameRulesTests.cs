@@ -1,4 +1,6 @@
 ﻿using Burfa.Common;
+using Burfa.Common.Board;
+using Burfa.Common.Engine;
 using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,18 +9,18 @@ namespace Burtfa.Common.Tests
     [TestClass]
     public class GameRulesTests
     {
-        private GameRules _gameRules;
-        private GameBoardSquare[] _testSequence;
+        private Rules _gameRules;
+        private BoardSquare[] _testSequence;
 
         [TestInitialize]
         public void Setup()
         {
-            _testSequence = new GameBoardSquare[8];
+            _testSequence = new BoardSquare[8];
             for (int i = 0; i < 8; i++)
             {
-                _testSequence[i] = new GameBoardSquare();
+                _testSequence[i] = new BoardSquare();
             }
-            _gameRules = new GameRules(A.Fake<GameBoard>());
+            _gameRules = new Rules(A.Fake<Board>());
         }
 
         [TestMethod]
@@ -27,7 +29,7 @@ namespace Burtfa.Common.Tests
             _testSequence[0].SetBlack();
             _testSequence[1].SetWhite();
 
-            bool isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 2);
+            bool isValid = Rules.IsValidInSequence(Player.Black, _testSequence, 2);
             Assert.IsTrue(isValid);
         }
 
@@ -37,7 +39,7 @@ namespace Burtfa.Common.Tests
             _testSequence[0].SetBlack();
             _testSequence[1].SetWhite();
 
-            bool isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 2);
+            bool isValid = Rules.IsValidInSequence(Player.White, _testSequence, 2);
             Assert.IsFalse(isValid);
         }
 
@@ -47,7 +49,7 @@ namespace Burtfa.Common.Tests
             _testSequence[0].SetBlack();
             _testSequence[1].SetWhite();
 
-            bool isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 3);
+            bool isValid = Rules.IsValidInSequence(Player.Black, _testSequence, 3);
             Assert.IsFalse(isValid);
         }
 
@@ -57,7 +59,7 @@ namespace Burtfa.Common.Tests
             _testSequence[0].SetBlack();
             _testSequence[1].SetWhite();
 
-            bool isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 3);
+            bool isValid = Rules.IsValidInSequence(Player.White, _testSequence, 3);
             Assert.IsFalse(isValid);
         }
 
@@ -67,7 +69,7 @@ namespace Burtfa.Common.Tests
             _testSequence[7].SetBlack();
             _testSequence[6].SetWhite();
 
-            bool isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 5);
+            bool isValid = Rules.IsValidInSequence(Player.Black, _testSequence, 5);
             Assert.IsTrue(isValid);
         }
 
@@ -77,7 +79,7 @@ namespace Burtfa.Common.Tests
             _testSequence[7].SetBlack();
             _testSequence[6].SetWhite();
 
-            bool isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 5);
+            bool isValid = Rules.IsValidInSequence(Player.White, _testSequence, 5);
             Assert.IsFalse(isValid);
         }
 
@@ -88,7 +90,7 @@ namespace Burtfa.Common.Tests
             _testSequence[4].SetWhite();
             _testSequence[5].SetBlack();
 
-            bool isValid = GameRules.IsValidInSequence(Player.Black, _testSequence, 3);
+            bool isValid = Rules.IsValidInSequence(Player.Black, _testSequence, 3);
             Assert.IsTrue(isValid);
         }
 
@@ -98,7 +100,7 @@ namespace Burtfa.Common.Tests
             _testSequence[4].SetWhite();
             _testSequence[5].SetBlack();
 
-            bool isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 3);
+            bool isValid = Rules.IsValidInSequence(Player.White, _testSequence, 3);
             Assert.IsFalse(isValid);
         }
 
@@ -109,7 +111,7 @@ namespace Burtfa.Common.Tests
             _testSequence[5].SetBlack();
             _testSequence[6].SetWhite();
 
-            bool isValid = GameRules.IsValidInSequence(Player.White, _testSequence, 3);
+            bool isValid = Rules.IsValidInSequence(Player.White, _testSequence, 3);
             Assert.IsFalse(isValid);
         }
     }

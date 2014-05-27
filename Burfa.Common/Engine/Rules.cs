@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Burfa.Common.Board;
 
-namespace Burfa.Common
+namespace Burfa.Common.Engine
 {
     public interface IGameRules
     {
@@ -16,11 +17,11 @@ namespace Burfa.Common
         Both
     }
 
-    public class GameRules : IGameRules
+    public class Rules : IGameRules
     {
         private readonly IGameBoard _board;
 
-        public GameRules(IGameBoard board)
+        public Rules(IGameBoard board)
         {
             _board = board;
         }
@@ -36,7 +37,7 @@ namespace Burfa.Common
             return ValidOrientation.None;
         }
 
-        public static bool IsValidInSequence(Player player, GameBoardSquare[] squareSeq, int turnPos)
+        public static bool IsValidInSequence(Player player, BoardSquare[] squareSeq, int turnPos)
         {
             bool isValid = true;
 
@@ -47,14 +48,14 @@ namespace Burfa.Common
 
             // Handle after turnPos in sequence
             bool isValidAfter = SeekOverOtherPlayerToThisPlayer(player,
-                new ArraySegment<GameBoardSquare>(squareSeq, turnPos + 1, squareSeq.Length - turnPos - 1).ToArray());
+                new ArraySegment<BoardSquare>(squareSeq, turnPos + 1, squareSeq.Length - turnPos - 1).ToArray());
             bool isValidBefore = SeekOverOtherPlayerToThisPlayer(player,
-                new ArraySegment<GameBoardSquare>(squareSeq, 0, turnPos).Reverse().ToArray());
+                new ArraySegment<BoardSquare>(squareSeq, 0, turnPos).Reverse().ToArray());
 
             return isValidBefore || isValidAfter;
         }
 
-        private static bool SeekOverOtherPlayerToThisPlayer(Player thisPlayer, GameBoardSquare[] squareSeq)
+        private static bool SeekOverOtherPlayerToThisPlayer(Player thisPlayer, BoardSquare[] squareSeq)
         {
             bool isValid = false;
             bool foundSquaresToTake = false;

@@ -1,5 +1,5 @@
 ﻿using System;
-using Burfa.Common;
+using Burfa.Common.Engine;
 
 namespace Burfa.ConsoleGame
 {
@@ -8,7 +8,7 @@ namespace Burfa.ConsoleGame
         public static void ToConsole(this IGameEngine ge)
         {
             ge.Board.ToConsole();
-            Console.WriteLine("Last turn was " + (ge.LastTurnResult.IsValid ? "" : "not ") + "valid");
+            if (ge.LastTurnResult.State != GameState.Initial) Console.WriteLine("Last turn was " + (ge.LastTurnResult.IsValid ? "" : "not ") + "valid");
             Console.WriteLine("Current Player Turn : " + ge.CurrentPlayer);
         }
     }

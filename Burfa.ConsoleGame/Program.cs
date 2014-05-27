@@ -1,5 +1,6 @@
 ﻿using System;
-using Burfa.Common;
+using Burfa.Common.Board;
+using Burfa.Common.Engine;
 using Ninject;
 
 namespace Burfa.ConsoleGame
@@ -10,9 +11,9 @@ namespace Burfa.ConsoleGame
         {
             using (IKernel kernel = new StandardKernel())
             {
-                kernel.Bind<IGameRules>().To<GameRules>().InSingletonScope();
-                kernel.Bind<IGameEngine>().To<GameEngine>().InSingletonScope();
-                kernel.Bind<IGameBoard>().To<GameBoard>().InSingletonScope();
+                kernel.Bind<IGameRules>().To<Rules>().InSingletonScope();
+                kernel.Bind<IGameEngine>().To<Engine>().InSingletonScope();
+                kernel.Bind<IGameBoard>().To<Board>().InSingletonScope();
                 var engine = kernel.Get<IGameEngine>();
                 engine.ToConsole();
                 while (true)

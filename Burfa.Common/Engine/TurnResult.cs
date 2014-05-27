@@ -1,7 +1,5 @@
-﻿namespace Burfa.Common
+﻿namespace Burfa.Common.Engine
 {
-    // 8204 narcissistic number
-
     public struct TurnResult
     {
         public bool IsValid;
