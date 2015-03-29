@@ -67,7 +67,7 @@ namespace Burfa.Common.Engine
                 _gameBoard.SetSquaresFromTurnPos(x, y, player, validOrientation);
                 _gameBoard.SetSquare(x, y, player);
                 CurrentGameState = result.State;
-                if (result.IsValid && CurrentGameState == GameState.InPlay) ToggleCurrentPlayer();
+                if (result.IsValid && CurrentGameState != GameState.InPlay) ToggleCurrentPlayer();
             }
             _lastTurnResult = result;
         }
@@ -79,7 +79,8 @@ namespace Burfa.Common.Engine
 
         private void ToggleCurrentPlayer()
         {
-            CurrentPlayer = (CurrentPlayer == Player.Black) ? Player.White : Player.Black;
+
+			CurrentPlayer = (CurrentPlayer == Player.Black) ? Player.White : Player.Black;
         }
     }
 }
