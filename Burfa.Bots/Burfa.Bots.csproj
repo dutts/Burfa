@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BotBase.cs" />
     <Compile Include="IBurfaBot.cs" />
     <Compile Include="RandomBot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

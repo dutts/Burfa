@@ -12,6 +12,7 @@ namespace Burfa.Common.Engine
         void TakeTurn(int x, int y);
         void TakeTurn(Player player, int x, int y);
         void Reset();
+        void SkipTurn();
     }
 
     public class Engine : IGameEngine
@@ -63,6 +64,7 @@ namespace Burfa.Common.Engine
             ValidOrientation validOrientation = _gameRules.IsValidTurn(player, x, y);
             if (validOrientation != ValidOrientation.None)
             {
+                if (CurrentGameState == GameState.Initial) CurrentGameState = GameState.InPlay;
                 result = new TurnResult {IsValid = true, State = CurrentGameState};
                 _gameBoard.SetSquaresFromTurnPos(x, y, player, validOrientation);
                 _gameBoard.SetSquare(x, y, player);
@@ -70,6 +72,11 @@ namespace Burfa.Common.Engine
                 if (result.IsValid && CurrentGameState != GameState.InPlay) ToggleCurrentPlayer();
             }
             _lastTurnResult = result;
+        }
+
+        public void SkipTurn()
+        {
+            ToggleCurrentPlayer();
         }
 
         public void Reset()
