@@ -8,6 +8,7 @@ namespace Burfa.Common.Board
 {
     public interface IGameBoard
     {
+        BoardSquare[] GameBoard { get; }
         int BoardEdgeLength { get; set; }
         int GameBoardSquareCount { get; }
         bool Completed { get; }
@@ -23,7 +24,7 @@ namespace Burfa.Common.Board
 
     public class Board : IGameBoard
     {
-        private BoardSquare[] _board;
+        public BoardSquare[] GameBoard { get; private set; }
 
         public Board(int boardEdgeLength = 8)
         {
@@ -40,7 +41,7 @@ namespace Burfa.Common.Board
 
         public bool Completed
         {
-            get { return _board.All(s => !s.IsEmpty()); }
+            get { return GameBoard.All(s => !s.IsEmpty()); }
         }
 
         /*
@@ -54,16 +55,16 @@ namespace Burfa.Common.Board
 
         public void Reset()
         {
-            _board = new BoardSquare[GameBoardSquareCount];
+            GameBoard = new BoardSquare[GameBoardSquareCount];
             for (int i = 0; i < GameBoardSquareCount; i++)
             {
-                _board[i] = new BoardSquare {X = i%BoardEdgeLength, Y = Math.Abs(i/BoardEdgeLength)};
+                GameBoard[i] = new BoardSquare {X = i%BoardEdgeLength, Y = Math.Abs(i/BoardEdgeLength)};
             }
         }
 
         public int GetPlayerScore(Player player)
         {
-            return _board.Count(s => s.BelongsTo(player));
+            return GameBoard.Count(s => s.BelongsTo(player));
         }
 
         public void SetSquare(int x, int y, Player player)
@@ -75,12 +76,12 @@ namespace Burfa.Common.Board
                 throw new BoardIndexOutOfRangeException("y value of " + x + " is larger than board edge length (" +
                                                         BoardEdgeLength + ")");
 
-            _board[(y*BoardEdgeLength) + x].Set(player);
+            GameBoard[(y*BoardEdgeLength) + x].Set(player);
         }
 
         public BoardSquare[] GetRow(int y)
         {
-            return new ArraySegment<BoardSquare>(_board, y*BoardEdgeLength, BoardEdgeLength).ToArray();
+            return new ArraySegment<BoardSquare>(GameBoard, y*BoardEdgeLength, BoardEdgeLength).ToArray();
         }
 
         public BoardSquare[] GetColumn(int x)
@@ -102,7 +103,7 @@ namespace Burfa.Common.Board
                 throw new BoardIndexOutOfRangeException("y value of " + y + " is larger than board edge length (" +
                                                         BoardEdgeLength + ")");
 
-            return _board[(y*BoardEdgeLength) + x];
+            return GameBoard[(y*BoardEdgeLength) + x];
         }
 
 

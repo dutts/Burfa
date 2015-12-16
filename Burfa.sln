@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burfa", "Burfa\Burfa.csproj", "{26081FDD-FC0D-4927-B8B6-909B4CC3F985}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burfa.ConsoleGame", "Burfa.ConsoleGame\Burfa.ConsoleGame.csproj", "{266C3A23-48D4-4BD0-BE82-86E27E8EF1A4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burfa.Bots", "Burfa.Bots\Burfa.Bots.csproj", "{070F88E3-861D-402E-A727-4B7D583215F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burfa.Game", "Burfa.Game\Burfa.Game.csproj", "{0FA1C755-3D03-42EA-8F53-8E013C8025DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{070F88E3-861D-402E-A727-4B7D583215F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{070F88E3-861D-402E-A727-4B7D583215F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{070F88E3-861D-402E-A727-4B7D583215F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FA1C755-3D03-42EA-8F53-8E013C8025DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FA1C755-3D03-42EA-8F53-8E013C8025DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FA1C755-3D03-42EA-8F53-8E013C8025DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FA1C755-3D03-42EA-8F53-8E013C8025DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
