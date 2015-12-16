@@ -69,7 +69,7 @@ namespace Burfa.Common.Engine
                 _gameBoard.SetSquaresFromTurnPos(x, y, player, validOrientation);
                 _gameBoard.SetSquare(x, y, player);
                 CurrentGameState = result.State;
-                if (result.IsValid && CurrentGameState != GameState.InPlay) ToggleCurrentPlayer();
+                if (result.IsValid && CurrentGameState == GameState.InPlay) ToggleCurrentPlayer();
             }
             _lastTurnResult = result;
         }
