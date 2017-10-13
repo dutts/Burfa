@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{266C3A23-48D4-4BD0-BE82-86E27E8EF1A4}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Burfa.ConsoleGame/Program.cs">
+    <Files>
+      <File FileName="Burfa.ConsoleGame/Program.cs" Line="26" Column="13" />
+      <File FileName="Burfa.ConsoleGame/GameBoardConsoleExtensions.cs" Line="1" Column="1" />
+      <File FileName="Burfa.ConsoleGame/GameEngineConsoleExtensions.cs" Line="1" Column="1" />
+      <File FileName="Burfa.Bots/RandomBot.cs" Line="1" Column="1" />
+      <File FileName="Burfa.Bots/IBurfaBot.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Burfa.ConsoleGame PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -26,8 +26,6 @@ namespace Burfa.Game.ViewModels
             _kernel.Bind<IBurfaBot>().To<RandomBot>().InSingletonScope().WithConstructorArgument("Player", Player.White);
 
             _engine = _kernel.Get<IGameEngine>();
-
-            _engine.Board.Ga
         }
 
         public void Dispose()

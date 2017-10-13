@@ -39,7 +39,7 @@ namespace Burfa.Common.Engine
 
         public static bool IsValidInSequence(Player player, BoardSquare[] squareSeq, int turnPos)
         {
-            bool isValid = true;
+            //bool isValid = true;
 
             // Handle white space on both sides, invalid
             if ((turnPos > 0 && squareSeq[turnPos - 1].IsEmpty()) &&
