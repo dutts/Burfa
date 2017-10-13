@@ -114,16 +114,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Burfa.Bots\Burfa.Bots.csproj">
-      <Project>{070f88e3-861d-402e-a727-4b7d583215f4}</Project>
-      <Name>Burfa.Bots</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Burfa.Common\Burfa.Common.csproj">
-      <Project>{7bbb606d-4026-45c2-9a77-622925ee5cc0}</Project>
-      <Name>Burfa.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -56,13 +56,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Burfa.Standard\Burfa.Standard.csproj">
-      <Project>{49DC7FC1-7EAE-41A8-BF87-A3CAC7836F09}</Project>
-      <Name>Burfa.Standard</Name>
+    <ProjectReference Include="..\Burfa.Bots\Burfa.Bots.csproj">
+      <Project>{9b868ad6-7731-444f-a39b-8984f5a5a893}</Project>
+      <Name>Burfa.Bots</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Burfa.Bots.Standard\Burfa.Bots.Standard.csproj">
-      <Project>{8CEFF3F3-730F-4F0B-A052-739C6BB77FAF}</Project>
-      <Name>Burfa.Bots.Standard</Name>
+    <ProjectReference Include="..\Burfa.Common\Burfa.Common.csproj">
+      <Project>{7efb5121-ae64-4cb7-91e1-e30f198c8f1f}</Project>
+      <Name>Burfa.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
