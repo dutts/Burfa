@@ -3,7 +3,7 @@ using System.Text;
 using Burfa.Common.Board;
 using Burfa.Common.Engine;
 
-namespace Burfa.ConsoleGame
+namespace Burfa.Api
 {
     public static class GameBoardConsoleExtensions
     {
