@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burfa.Bots", "Burfa.Bots\Bu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burfa.Game", "Burfa.Game\Burfa.Game.csproj", "{0FA1C755-3D03-42EA-8F53-8E013C8025DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burfa.Standard", "Burfa.Standard\Burfa.Standard.csproj", "{49DC7FC1-7EAE-41A8-BF87-A3CAC7836F09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burfa.Bots.Standard", "Burfa.Bots.Standard\Burfa.Bots.Standard.csproj", "{8CEFF3F3-730F-4F0B-A052-739C6BB77FAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{0FA1C755-3D03-42EA-8F53-8E013C8025DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FA1C755-3D03-42EA-8F53-8E013C8025DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FA1C755-3D03-42EA-8F53-8E013C8025DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49DC7FC1-7EAE-41A8-BF87-A3CAC7836F09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49DC7FC1-7EAE-41A8-BF87-A3CAC7836F09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49DC7FC1-7EAE-41A8-BF87-A3CAC7836F09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49DC7FC1-7EAE-41A8-BF87-A3CAC7836F09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CEFF3F3-730F-4F0B-A052-739C6BB77FAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CEFF3F3-730F-4F0B-A052-739C6BB77FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CEFF3F3-730F-4F0B-A052-739C6BB77FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CEFF3F3-730F-4F0B-A052-739C6BB77FAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

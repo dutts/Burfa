@@ -1,26 +1,31 @@
 ﻿using System;
+using Autofac;
 using Burfa.Bots;
 using Burfa.Common.Board;
 using Burfa.Common.Engine;
-using Ninject;
 
 namespace Burfa.ConsoleGame
 {
     internal class Program
     {
+        private static IContainer Container;
+
         private static void Main(string[] args)
         {
-            using (IKernel kernel = new StandardKernel())
+            var builder = new ContainerBuilder();
+            builder.RegisterType<Rules>().As<IGameRules>().SingleInstance();
+            builder.RegisterType<Engine>().As<IGameEngine>().SingleInstance();
+            builder.RegisterType<Board>().As<IGameBoard>().SingleInstance();
+            builder.RegisterType<RandomBot>().As<IBurfaBot>().SingleInstance().WithParameter("Player", Player.White);
+            Container = builder.Build();
+
+            using (var scope = Container.BeginLifetimeScope())
             {
-                kernel.Bind<IGameRules>().To<Rules>().InSingletonScope();
-                kernel.Bind<IGameEngine>().To<Engine>().InSingletonScope();
-                kernel.Bind<IGameBoard>().To<Board>().InSingletonScope();
-                kernel.Bind<IBurfaBot>().To<RandomBot>().InSingletonScope().WithConstructorArgument("Player", Player.White);
-
-                var engine = kernel.Get<IGameEngine>();
+                var engine = scope.Resolve<IGameEngine>();
                 engine.ToConsole();
+            
 
-                var computerPlayer = kernel.Get<IBurfaBot>();
+                var computerPlayer = scope.Resolve<IBurfaBot>();
 
                 while ((engine.CurrentGameState == GameState.InPlay) || (engine.CurrentGameState == GameState.Initial))
                 {
