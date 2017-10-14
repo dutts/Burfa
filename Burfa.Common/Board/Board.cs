@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Burfa.Common.Engine;
+using Burfa.Common.Engine.Types;
 using Burfa.Common.Exceptions;
 
 namespace Burfa.Common.Board

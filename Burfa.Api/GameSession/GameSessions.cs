@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Burfa.Api.Game
+namespace Burfa.Api.GameSession
 {
     public interface IGameSessions
     {

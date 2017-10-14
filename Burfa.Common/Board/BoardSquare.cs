@@ -1,4 +1,4 @@
-﻿using Burfa.Common.Engine;
+﻿using Burfa.Common.Engine.Types;
 
 namespace Burfa.Common.Board
 {

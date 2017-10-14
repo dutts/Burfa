@@ -12,13 +12,13 @@ namespace Burfa.Api.Controllers
     {
         const string SessionGameName = "_GameName";
 
-        private readonly IGameEngine _gameEngine;
+        private readonly IGame _game;
         readonly IBurfaBot _burfaBot;
 
-        public GameController(IGameEngine gameEngine, IBurfaBot burfaBot)
+        public GameController(IGame game, IBurfaBot burfaBot)
         {
             _burfaBot = burfaBot;
-            _gameEngine = gameEngine;
+            _game = game;
         }
 
         public IActionResult Index()
@@ -34,7 +34,7 @@ namespace Burfa.Api.Controllers
 
         public IActionResult Board()
         {
-            var board = _gameEngine.Board;
+            var board = _game.Board;
             //var json = JsonConvert.SerializeObject(board);
 
             //var name = HttpContext.Session.GetString(SessionKeyName);
@@ -44,9 +44,9 @@ namespace Burfa.Api.Controllers
 
         public IActionResult TakeTurn(int x, int y)
         {
-            _gameEngine.TakeTurn(x, y);
+            _game.TakeTurn(x, y);
             var computerTurn = _burfaBot.GetTurn();
-            _gameEngine.TakeTurn(computerTurn.Item1, computerTurn.Item2);
+            _game.TakeTurn(computerTurn.Item1, computerTurn.Item2);
 
             return RedirectToAction("Board");
         }

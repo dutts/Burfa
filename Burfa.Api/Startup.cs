@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Burfa.Api.Game;
+using Burfa.Api.GameSession;
 using Burfa.Bots;
 using Burfa.Common.Board;
 using Burfa.Common.Engine;
+using Burfa.Common.Engine.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -44,7 +41,7 @@ namespace Burfa.Api
         {
             builder.RegisterType<GameSessions>().As<IGameSessions>().SingleInstance();
             builder.RegisterType<Rules>().As<IGameRules>().SingleInstance();
-            builder.RegisterType<Engine>().As<IGameEngine>().SingleInstance();
+            builder.RegisterType<Game>().As<IGame>().SingleInstance();
             builder.RegisterType<Board>().As<IGameBoard>().SingleInstance();
             builder.RegisterType<RandomBot>().As<IBurfaBot>().SingleInstance().WithParameter("Player", Player.White);
         }

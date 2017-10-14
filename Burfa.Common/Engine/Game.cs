@@ -1,8 +1,9 @@
 ﻿using Burfa.Common.Board;
+using Burfa.Common.Engine.Types;
 
 namespace Burfa.Common.Engine
 {
-    public interface IGameEngine
+    public interface IGame
     {
         IGameBoard Board { get; }
         Player CurrentPlayer { get; }
@@ -15,15 +16,15 @@ namespace Burfa.Common.Engine
         void SkipTurn();
     }
 
-    public class Engine : IGameEngine
+    public class Game : IGame
     {
-        private readonly IGameBoard _gameBoard;
-        private readonly IGameRules _gameRules;
-        private TurnResult _lastTurnResult;
+        readonly IGameBoard _gameBoard;
+        readonly IGameRules _gameRules;
+        TurnResult _lastTurnResult;
 
-        public Engine(IGameBoard gameBoard, IGameRules gameRules)
+        public Game(IGameBoard gameBoard, IGameRules gameRules)
         {
-            _lastTurnResult = new TurnResult {IsValid = true, State = GameState.Initial};
+            _lastTurnResult = new TurnResult { IsValid = true, State = GameState.Initial };
             _gameBoard = gameBoard;
             _gameRules = gameRules;
             Reset();
@@ -59,13 +60,13 @@ namespace Burfa.Common.Engine
 
         public void TakeTurn(Player player, int x, int y)
         {
-            var result = new TurnResult {IsValid = false, State = GameState.InPlay};
+            var result = new TurnResult { IsValid = false, State = GameState.InPlay };
 
             ValidOrientation validOrientation = _gameRules.IsValidTurn(player, x, y);
             if (validOrientation != ValidOrientation.None)
             {
                 if (CurrentGameState == GameState.Initial) CurrentGameState = GameState.InPlay;
-                result = new TurnResult {IsValid = true, State = CurrentGameState};
+                result = new TurnResult { IsValid = true, State = CurrentGameState };
                 _gameBoard.SetSquaresFromTurnPos(x, y, player, validOrientation);
                 _gameBoard.SetSquare(x, y, player);
                 CurrentGameState = result.State;
@@ -84,10 +85,10 @@ namespace Burfa.Common.Engine
             _gameBoard.Reset();
         }
 
-        private void ToggleCurrentPlayer()
+        void ToggleCurrentPlayer()
         {
 
-			CurrentPlayer = (CurrentPlayer == Player.Black) ? Player.White : Player.Black;
+            CurrentPlayer = (CurrentPlayer == Player.Black) ? Player.White : Player.Black;
         }
     }
 }

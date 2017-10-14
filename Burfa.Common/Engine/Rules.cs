@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Burfa.Common.Board;
+using Burfa.Common.Engine.Types;
 
 namespace Burfa.Common.Engine
 {

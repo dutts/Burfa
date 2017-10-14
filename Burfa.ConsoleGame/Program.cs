@@ -3,6 +3,7 @@ using Autofac;
 using Burfa.Bots;
 using Burfa.Common.Board;
 using Burfa.Common.Engine;
+using Burfa.Common.Engine.Types;
 
 namespace Burfa.ConsoleGame
 {
@@ -14,44 +15,44 @@ namespace Burfa.ConsoleGame
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<Rules>().As<IGameRules>().SingleInstance();
-            builder.RegisterType<Engine>().As<IGameEngine>().SingleInstance();
+            builder.RegisterType<Game>().As<IGame>().SingleInstance();
             builder.RegisterType<Board>().As<IGameBoard>().SingleInstance();
             builder.RegisterType<RandomBot>().As<IBurfaBot>().SingleInstance().WithParameter("Player", Player.White);
             Container = builder.Build();
 
             using (var scope = Container.BeginLifetimeScope())
             {
-                var engine = scope.Resolve<IGameEngine>();
-                engine.ToConsole();
+                var game = scope.Resolve<IGame>();
+                game.ToConsole();
             
 
                 var computerPlayer = scope.Resolve<IBurfaBot>();
 
-                while ((engine.CurrentGameState == GameState.InPlay) || (engine.CurrentGameState == GameState.Initial))
+                while ((game.CurrentGameState == GameState.InPlay) || (game.CurrentGameState == GameState.Initial))
                 {
-                    if (engine.CurrentPlayer == Player.Black)
+                    if (game.CurrentPlayer == Player.Black)
                     {
                         Console.WriteLine("Enter move as X,Y. S to skip or Q to quit:");
                         string line = Console.ReadLine();
                         if (line.ToUpper() == "Q") break;
                         if (line.ToUpper() == "S")
                         {
-                            engine.SkipTurn();
+                            game.SkipTurn();
                         }
                         else
                         {
                             string[] coords = line.Split(',');
                             int x, y;
                             if (coords.Length != 2 || !TryParseCoords(coords, out x, out y)) continue;
-                            engine.TakeTurn(x, y);                            
+                            game.TakeTurn(x, y);                            
                         }
-                        engine.ToConsole();
+                        game.ToConsole();
                     }
                     else // BOT
                     {
                         var computerTurn = computerPlayer.GetTurn();
-                        engine.TakeTurn(computerTurn.Item1, computerTurn.Item2);
-                        engine.ToConsole();
+                        game.TakeTurn(computerTurn.Item1, computerTurn.Item2);
+                        game.ToConsole();
                     }
                 }
             }

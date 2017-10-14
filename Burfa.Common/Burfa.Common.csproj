@@ -8,5 +8,6 @@
     <Folder Include="Board\" />
     <Folder Include="Engine\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="Engine\Types\" />
   </ItemGroup>
 </Project>

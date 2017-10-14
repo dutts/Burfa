@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Burfa.Api.Game
+namespace Burfa.Api.GameSession
 {
     public class GameSession
     {

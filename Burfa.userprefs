@@ -1,20 +1,28 @@
 ﻿<Properties StartupConfiguration="{C40BC081-31F5-4B68-AE8A-BB9A99531520}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Burfa.Api/Game/GameSessions.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Burfa.Api/GameBoardConsoleExtensions.cs">
     <Files>
-      <File FileName="Burfa.Api/Controllers/GameController.cs" Line="27" Column="10" />
-      <File FileName="Burfa.ConsoleGame/GameBoardConsoleExtensions.cs" Line="34" Column="26" />
-      <File FileName="Burfa.ConsoleGame/GameEngineConsoleExtensions.cs" Line="12" Column="76" />
-      <File FileName="Burfa.Api/Startup.cs" Line="15" Column="20" />
+      <File FileName="Burfa.Api/Controllers/GameController.cs" Line="11" Column="45" />
+      <File FileName="Burfa.ConsoleGame/GameBoardConsoleExtensions.cs" Line="40" Column="88" />
+      <File FileName="Burfa.ConsoleGame/GameConsoleExtensions.cs" Line="7" Column="29" />
+      <File FileName="Burfa.Api/Startup.cs" Line="8" Column="36" />
       <File FileName="Burfa.Api/Program.cs" Line="3" Column="1" />
-      <File FileName="Burfa.Common/Engine/Engine.cs" Line="1" Column="1" />
-      <File FileName="Burfa.Common/Engine/Rules.cs" Line="1" Column="1" />
-      <File FileName="Burfa.Common/Engine/Player.cs" Line="1" Column="1" />
-      <File FileName="Burfa.Common/Engine/TurnResult.cs" Line="1" Column="1" />
-      <File FileName="Burfa.Common/Engine/GameState.cs" Line="1" Column="1" />
-      <File FileName="Burfa.Common/Board/Board.cs" Line="1" Column="1" />
+      <File FileName="Burfa.Common/Engine/Game.cs" Line="13" Column="32" />
+      <File FileName="Burfa.Common/Engine/Rules.cs" Line="101" Column="59" />
+      <File FileName="Burfa.Common/Engine/Types/Player.cs" Line="8" Column="2" />
+      <File FileName="Burfa.Common/Engine/Types/TurnResult.cs" Line="8" Column="2" />
+      <File FileName="Burfa.Common/Engine/Types/GameState.cs" Line="11" Column="2" />
+      <File FileName="Burfa.Common/Board/Board.cs" Line="14" Column="42" />
       <File FileName="Burfa.Api/appsettings.json" Line="1" Column="1" />
-      <File FileName="Burfa.Api/Game/GameSessions.cs" Line="26" Column="2" />
-      <File FileName="Burfa.Api/Game/GameSession.cs" Line="1" Column="1" />
+      <File FileName="Burfa.Api/GameSession/GameSessions.cs" Line="14" Column="9" />
+      <File FileName="Burfa.Api/GameSession/GameSession.cs" Line="2" Column="32" />
+      <File FileName="Burfa.Common/Board/BoardSquare.cs" Line="31" Column="28" />
+      <File FileName="Burfa.Common/Exceptions/BoardIndexOutOfRangeException.cs" Line="1" Column="1" />
+      <File FileName="Burfa.Bots/BotBase.cs" Line="11" Column="21" />
+      <File FileName="Burfa.ConsoleGame/Program.cs" Line="26" Column="34" />
+      <File FileName="Burfa.Common.Tests/GameRulesTests.cs" Line="33" Column="54" />
+      <File FileName="Burfa.Common.Tests/GameBoardTests.cs" Line="103" Column="69" />
+      <File FileName="Burfa.Bots/RandomBot.cs" Line="14" Column="10" />
+      <File FileName="Burfa.Api/GameBoardConsoleExtensions.cs" Line="40" Column="84" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">

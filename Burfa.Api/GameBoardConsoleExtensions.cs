@@ -2,6 +2,7 @@
 using System.Text;
 using Burfa.Common.Board;
 using Burfa.Common.Engine;
+using Burfa.Common.Engine.Types;
 
 namespace Burfa.Api
 {

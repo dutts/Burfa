@@ -1,5 +1,6 @@
 ﻿using Burfa.Common.Board;
 using Burfa.Common.Engine;
+using Burfa.Common.Engine.Types;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Burtfa.Common.Tests

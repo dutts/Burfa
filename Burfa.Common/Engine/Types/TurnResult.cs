@@ -1,4 +1,4 @@
-﻿namespace Burfa.Common.Engine
+﻿namespace Burfa.Common.Engine.Types
 {
     public struct TurnResult
     {

@@ -8,7 +8,7 @@ namespace Burfa.Bots
     {
         private readonly Random _rng;
 
-        public RandomBot(IGameRules rules, IGameEngine engine, IGameBoard gameBoard) : base(rules, engine, gameBoard)
+        public RandomBot(IGameRules rules, IGame game, IGameBoard gameBoard) : base(rules, game, gameBoard)
         {
             _rng = new Random();
         }

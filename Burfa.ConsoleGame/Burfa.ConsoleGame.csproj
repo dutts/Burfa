@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameBoardConsoleExtensions.cs" />
-    <Compile Include="GameEngineConsoleExtensions.cs" />
+    <Compile Include="GameConsoleExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
