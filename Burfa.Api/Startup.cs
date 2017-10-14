@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Burfa.Api.Game;
 using Burfa.Bots;
 using Burfa.Common.Board;
 using Burfa.Common.Engine;
@@ -11,8 +12,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Burfa.Api
 {
@@ -43,6 +42,7 @@ namespace Burfa.Api
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            builder.RegisterType<GameSessions>().As<IGameSessions>().SingleInstance();
             builder.RegisterType<Rules>().As<IGameRules>().SingleInstance();
             builder.RegisterType<Engine>().As<IGameEngine>().SingleInstance();
             builder.RegisterType<Board>().As<IGameBoard>().SingleInstance();
