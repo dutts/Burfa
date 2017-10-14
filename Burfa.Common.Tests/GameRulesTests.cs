@@ -1,8 +1,5 @@
-﻿using Burfa.Common;
-using Burfa.Common.Board;
-using Burfa.Common.Engine;
+﻿using Burfa.Common.Engine;
 using Burfa.Common.Engine.Types;
-using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Burtfa.Common.Tests

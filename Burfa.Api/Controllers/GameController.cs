@@ -1,10 +1,7 @@
-﻿using System;
-using Burfa.Bots;
-using Burfa.Common.Board;
+﻿using Burfa.Bots;
 using Burfa.Common.Engine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace Burfa.Api.Controllers
 {

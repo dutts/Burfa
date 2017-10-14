@@ -1,6 +1,6 @@
 ﻿using Burfa.Common.Engine.Types;
 
-namespace Burfa.Common.Board
+namespace Burfa.Common.Engine
 {
     public class BoardSquare
     {

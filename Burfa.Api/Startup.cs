@@ -2,7 +2,6 @@
 using Autofac;
 using Burfa.Api.GameSession;
 using Burfa.Bots;
-using Burfa.Common.Board;
 using Burfa.Common.Engine;
 using Burfa.Common.Engine.Types;
 using Microsoft.AspNetCore.Builder;
@@ -41,7 +40,6 @@ namespace Burfa.Api
         {
             builder.RegisterType<GameSessions>().As<IGameSessions>().SingleInstance();
             builder.RegisterType<Game>().As<IGame>().SingleInstance();
-            builder.RegisterType<Board>().As<IGameBoard>().SingleInstance();
             builder.RegisterType<RandomBot>().As<IBurfaBot>().SingleInstance().WithParameter("Player", Player.White);
         }
 

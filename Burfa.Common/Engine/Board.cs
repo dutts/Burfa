@@ -1,49 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Burfa.Common.Engine;
 using Burfa.Common.Engine.Types;
 using Burfa.Common.Exceptions;
 
-namespace Burfa.Common.Board
+namespace Burfa.Common.Engine
 {
-    public interface IGameBoard
-    {
-        BoardSquare[] GameBoard { get; }
-        int BoardEdgeLength { get; set; }
-        int GameBoardSquareCount { get; }
-        bool Completed { get; }
-        void Reset();
-        void SetSquare(int x, int y, Player player);
-        int GetPlayerScore(Player player);
-        BoardSquare[] GetRow(int y);
-        BoardSquare[] GetColumn(int x);
-        BoardSquare GetGameBoardSquare(int x, int y);
-
-        void SetSquaresFromTurnPos(int x, int y, Player player, ValidOrientation validOrientation);
-    }
-
-    public class Board : IGameBoard
+    public class Board
     {
         public BoardSquare[] GameBoard { get; private set; }
 
-        public Board(int boardEdgeLength = 8)
+        private Board(int boardEdgeLength)
         {
             BoardEdgeLength = boardEdgeLength;
             Reset();
         }
 
+        public static Board Create(int boardEdgeLength = 8)
+        {
+            return new Board(8);
+        }
+
         public int BoardEdgeLength { get; set; }
 
-        public int GameBoardSquareCount
-        {
-            get { return BoardEdgeLength*BoardEdgeLength; }
-        }
+        public int GameBoardSquareCount => BoardEdgeLength * BoardEdgeLength;
 
-        public bool Completed
-        {
-            get { return GameBoard.All(s => !s.IsEmpty()); }
-        }
+        public bool Completed => GameBoard.All(s => !s.IsEmpty());
 
         /*
          Board location example

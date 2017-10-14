@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using Burfa.Common.Board;
 using Burfa.Common.Engine;
 using Burfa.Common.Engine.Types;
 
@@ -8,7 +7,7 @@ namespace Burfa.Api
 {
     public static class GameBoardConsoleExtensions
     {
-        public static string ToDisplayString(this IGameBoard gb)
+        public static string ToDisplayString(this Board gb)
         {
             var sb = new StringBuilder();
 
@@ -59,7 +58,7 @@ namespace Burfa.Api
             return sb.ToString();
         }
 
-        public static void ToConsole(this IGameBoard gb)
+        public static void ToConsole(this Board gb)
         {
             Console.Clear();
             Console.Write(gb.ToDisplayString());

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Burfa.Common.Board;
 using Burfa.Common.Engine.Types;
 
 namespace Burfa.Common.Engine
@@ -15,7 +14,7 @@ namespace Burfa.Common.Engine
 
     public static class Rules
     {
-        public static ValidOrientation IsValidTurn(IGameBoard board, Player player, int x, int y)
+        public static ValidOrientation IsValidTurn(Board board, Player player, int x, int y)
         {
             bool upDownValid = IsValidInSequence(player, board.GetColumn(x), y);
             bool leftRightValid = IsValidInSequence(player, board.GetRow(y), x);
@@ -64,7 +63,7 @@ namespace Burfa.Common.Engine
             return isValid;
         }
 
-        public static bool IsAdjacentToPlayerSquare(IGameBoard board, Player player, int x, int y)
+        public static bool IsAdjacentToPlayerSquare(Board board, Player player, int x, int y)
         {
             bool retVal = false;
 
@@ -81,7 +80,7 @@ namespace Burfa.Common.Engine
             return retVal;
         }
 
-        public static GameState GetGameState(IGameBoard board)
+        public static GameState GetGameState(Board board)
         {
             var retVal = GameState.InPlay;
             if (board.Completed)

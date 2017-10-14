@@ -1,7 +1,6 @@
 ﻿using System;
 using Autofac;
 using Burfa.Bots;
-using Burfa.Common.Board;
 using Burfa.Common.Engine;
 using Burfa.Common.Engine.Types;
 
@@ -15,7 +14,6 @@ namespace Burfa.ConsoleGame
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<Game>().As<IGame>().SingleInstance();
-            builder.RegisterType<Board>().As<IGameBoard>().SingleInstance();
             builder.RegisterType<RandomBot>().As<IBurfaBot>().SingleInstance().WithParameter("Player", Player.White);
             Container = builder.Build();
 
@@ -23,9 +21,9 @@ namespace Burfa.ConsoleGame
             {
                 var game = scope.Resolve<IGame>();
                 game.ToConsole();
-            
 
-                var computerPlayer = scope.Resolve<IBurfaBot>();
+
+                var computerPlayer = new RandomBot(game, Player.White);
 
                 while ((game.CurrentGameState == GameState.InPlay) || (game.CurrentGameState == GameState.Initial))
                 {

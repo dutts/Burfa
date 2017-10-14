@@ -1,14 +1,13 @@
-﻿using Burfa.Common.Board;
-using Burfa.Common.Engine.Types;
+﻿using Burfa.Common.Engine.Types;
 
 namespace Burfa.Common.Engine
 {
     public interface IGame
     {
-        IGameBoard Board { get; }
         Player CurrentPlayer { get; }
         GameState CurrentGameState { get; }
         TurnResult LastTurnResult { get; }
+        Board Board { get; }
         void Setup();
         void TakeTurn(int x, int y);
         void TakeTurn(Player player, int x, int y);
@@ -18,26 +17,20 @@ namespace Burfa.Common.Engine
 
     public class Game : IGame
     {
-        readonly IGameBoard _gameBoard;
+        readonly Board _gameBoard;
         TurnResult _lastTurnResult;
 
-        public Game(IGameBoard gameBoard)
+        public Game()
         {
             _lastTurnResult = new TurnResult { IsValid = true, State = GameState.Initial };
-            _gameBoard = gameBoard;
+            _gameBoard = Board.Create();
             Reset();
             Setup();
         }
 
-        public IGameBoard Board
-        {
-            get { return _gameBoard; }
-        }
+        public Board Board => _gameBoard;
 
-        public TurnResult LastTurnResult
-        {
-            get { return _lastTurnResult; }
-        }
+        public TurnResult LastTurnResult => _lastTurnResult;
 
         public Player CurrentPlayer { get; set; }
         public GameState CurrentGameState { get; set; }
@@ -85,7 +78,6 @@ namespace Burfa.Common.Engine
 
         void ToggleCurrentPlayer()
         {
-
             CurrentPlayer = (CurrentPlayer == Player.Black) ? Player.White : Player.Black;
         }
     }
