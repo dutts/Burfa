@@ -10,9 +10,7 @@ namespace Burfa.Api.Controllers
 {
     public class GameController : Controller
     {
-        const string SessionKeyName = "_Name";
-        const string SessionKeyYearsMember = "_YearsMember";
-        const string SessionKeyDate = "_Date";
+        const string SessionGameName = "_GameName";
 
         private readonly IGameEngine _gameEngine;
         readonly IBurfaBot _burfaBot;
@@ -25,10 +23,13 @@ namespace Burfa.Api.Controllers
 
         public IActionResult Index()
         {
-            // Requires using Microsoft.AspNetCore.Http;
-            //HttpContext.Session.SetString(SessionKeyName, "Rick");
-            //HttpContext.Session.SetInt32(SessionKeyYearsMember, 3);
             return RedirectToAction("Board");
+        }
+
+        public IActionResult NewGame(string gameId)
+        {
+            HttpContext.Session.SetString(SessionGameName, gameId);
+            return Content($"New game {gameId} created");
         }
 
         public IActionResult Board()
