@@ -10,7 +10,6 @@ namespace Burtfa.Common.Tests
     [TestClass]
     public class GameRulesTests
     {
-        private Rules _gameRules;
         private BoardSquare[] _testSequence;
 
         [TestInitialize]
@@ -21,7 +20,6 @@ namespace Burtfa.Common.Tests
             {
                 _testSequence[i] = new BoardSquare();
             }
-            _gameRules = new Rules(A.Fake<Board>());
         }
 
         [TestMethod]

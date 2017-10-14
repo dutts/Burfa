@@ -19,14 +19,12 @@ namespace Burfa.Common.Engine
     public class Game : IGame
     {
         readonly IGameBoard _gameBoard;
-        readonly IGameRules _gameRules;
         TurnResult _lastTurnResult;
 
-        public Game(IGameBoard gameBoard, IGameRules gameRules)
+        public Game(IGameBoard gameBoard)
         {
             _lastTurnResult = new TurnResult { IsValid = true, State = GameState.Initial };
             _gameBoard = gameBoard;
-            _gameRules = gameRules;
             Reset();
             Setup();
         }
@@ -62,7 +60,7 @@ namespace Burfa.Common.Engine
         {
             var result = new TurnResult { IsValid = false, State = GameState.InPlay };
 
-            ValidOrientation validOrientation = _gameRules.IsValidTurn(player, x, y);
+            ValidOrientation validOrientation = Rules.IsValidTurn(_gameBoard, player, x, y);
             if (validOrientation != ValidOrientation.None)
             {
                 if (CurrentGameState == GameState.Initial) CurrentGameState = GameState.InPlay;

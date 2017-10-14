@@ -8,7 +8,7 @@ namespace Burfa.Bots
     {
         private readonly Random _rng;
 
-        public RandomBot(IGameRules rules, IGame game, IGameBoard gameBoard) : base(rules, game, gameBoard)
+        public RandomBot(IGame game, IGameBoard gameBoard) : base(game, gameBoard)
         {
             _rng = new Random();
         }
@@ -20,7 +20,7 @@ namespace Burfa.Bots
                 var xPos = _rng.Next(0, _gameBoard.BoardEdgeLength - 1);
                 var yPos = _rng.Next(0, _gameBoard.BoardEdgeLength - 1);
 
-                if (_rules.IsValidTurn(_player, xPos, yPos) != ValidOrientation.None)
+                if (Rules.IsValidTurn(_gameBoard, _player, xPos, yPos) != ValidOrientation.None)
                 {
                     return Tuple.Create(xPos, yPos);
                 }

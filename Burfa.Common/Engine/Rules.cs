@@ -5,11 +5,6 @@ using Burfa.Common.Engine.Types;
 
 namespace Burfa.Common.Engine
 {
-    public interface IGameRules
-    {
-        ValidOrientation IsValidTurn(Player player, int x, int y);
-    }
-
     public enum ValidOrientation
     {
         None,
@@ -18,19 +13,12 @@ namespace Burfa.Common.Engine
         Both
     }
 
-    public class Rules : IGameRules
+    public static class Rules
     {
-        private readonly IGameBoard _board;
-
-        public Rules(IGameBoard board)
+        public static ValidOrientation IsValidTurn(IGameBoard board, Player player, int x, int y)
         {
-            _board = board;
-        }
-
-        public ValidOrientation IsValidTurn(Player player, int x, int y)
-        {
-            bool upDownValid = IsValidInSequence(player, _board.GetColumn(x), y);
-            bool leftRightValid = IsValidInSequence(player, _board.GetRow(y), x);
+            bool upDownValid = IsValidInSequence(player, board.GetColumn(x), y);
+            bool leftRightValid = IsValidInSequence(player, board.GetRow(y), x);
 
             if (upDownValid && leftRightValid) return ValidOrientation.Both;
             if (upDownValid) return ValidOrientation.Vertical;
@@ -76,16 +64,16 @@ namespace Burfa.Common.Engine
             return isValid;
         }
 
-        public bool IsAdjacentToPlayerSquare(Player player, int x, int y)
+        public static bool IsAdjacentToPlayerSquare(IGameBoard board, Player player, int x, int y)
         {
             bool retVal = false;
 
-            if ((x >= 0 && x < _board.BoardEdgeLength) && (y >= 0 && y < _board.BoardEdgeLength))
+            if ((x >= 0 && x < board.BoardEdgeLength) && (y >= 0 && y < board.BoardEdgeLength))
             {
-                if ((_board.GetGameBoardSquare(x - 1, y).State == player) ||
-                    (_board.GetGameBoardSquare(x + 1, y).State == player) ||
-                    (_board.GetGameBoardSquare(x, y + 1).State == player) ||
-                    (_board.GetGameBoardSquare(x, y + 1).State == player))
+                if ((board.GetGameBoardSquare(x - 1, y).State == player) ||
+                    (board.GetGameBoardSquare(x + 1, y).State == player) ||
+                    (board.GetGameBoardSquare(x, y + 1).State == player) ||
+                    (board.GetGameBoardSquare(x, y + 1).State == player))
                 {
                     retVal = true;
                 }
@@ -93,13 +81,13 @@ namespace Burfa.Common.Engine
             return retVal;
         }
 
-        public GameState GetGameState()
+        public static GameState GetGameState(IGameBoard board)
         {
             var retVal = GameState.InPlay;
-            if (_board.Completed)
+            if (board.Completed)
             {
-                int blackScore = _board.GetPlayerScore(Player.Black);
-                int whiteScore = _board.GetPlayerScore(Player.White);
+                int blackScore = board.GetPlayerScore(Player.Black);
+                int whiteScore = board.GetPlayerScore(Player.White);
                 if (blackScore == whiteScore) retVal = GameState.Draw;
                 else if (blackScore > whiteScore) retVal = GameState.WinBlack;
                 else if (whiteScore < blackScore) retVal = GameState.WinWhite;

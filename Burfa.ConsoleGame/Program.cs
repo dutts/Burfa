@@ -14,7 +14,6 @@ namespace Burfa.ConsoleGame
         private static void Main(string[] args)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<Rules>().As<IGameRules>().SingleInstance();
             builder.RegisterType<Game>().As<IGame>().SingleInstance();
             builder.RegisterType<Board>().As<IGameBoard>().SingleInstance();
             builder.RegisterType<RandomBot>().As<IBurfaBot>().SingleInstance().WithParameter("Player", Player.White);
