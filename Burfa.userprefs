@@ -1,21 +1,25 @@
-﻿<Properties StartupConfiguration="{266C3A23-48D4-4BD0-BE82-86E27E8EF1A4}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Burfa.Bots/RandomBot.cs">
+﻿<Properties StartupConfiguration="{C40BC081-31F5-4B68-AE8A-BB9A99531520}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Burfa.Api/GameManager.cs">
     <Files>
-      <File FileName="Burfa.Bots/BotBase.cs" Line="9" Column="18" />
+      <File FileName="Burfa.Bots/BotBase.cs" Line="8" Column="6" />
       <File FileName="Burfa.Common/Engine/Game.cs" Line="18" Column="30" />
       <File FileName="Burfa.Common/Engine/Board.cs" Line="19" Column="23" />
       <File FileName="Burfa.Common/Engine/BoardSquare.cs" Line="13" Column="9" />
       <File FileName="Burfa.Common/Engine/Rules.cs" Line="2" Column="19" />
-      <File FileName="Burfa.Bots/RandomBot.cs" Line="10" Column="53" />
+      <File FileName="Burfa.Bots/RandomBot.cs" Line="11" Column="41" />
       <File FileName="Burfa.Common.Tests/GameBoardTests.cs" Line="110" Column="42" />
       <File FileName="Burfa.Common.Tests/GameRulesTests.cs" Line="1" Column="1" />
       <File FileName="Burfa.ConsoleGame/GameBoardConsoleExtensions.cs" Line="58" Column="34" />
-      <File FileName="Burfa.ConsoleGame/Program.cs" Line="26" Column="58" />
+      <File FileName="Burfa.ConsoleGame/Program.cs" Line="16" Column="71" />
       <File FileName="Burfa.ConsoleGame/GameConsoleExtensions.cs" Line="11" Column="18" />
-      <File FileName="Burfa.Api/Controllers/GameController.cs" Line="2" Column="1" />
+      <File FileName="Burfa.Api/Controllers/GameController.cs" Line="33" Column="33" />
       <File FileName="Burfa.Api/GameBoardConsoleExtensions.cs" Line="58" Column="34" />
-      <File FileName="Burfa.Api/Startup.cs" Line="42" Column="71" />
+      <File FileName="Burfa.Api/Startup.cs" Line="41" Column="13" />
       <File FileName="Burfa.Bots/IBurfaBot.cs" Line="5" Column="22" />
+      <File FileName="Burfa.Api/Program.cs" Line="3" Column="1" />
+      <File FileName="Burfa.Api/SessionExtensions.cs" Line="6" Column="42" />
+      <File FileName="Burfa.Api/appsettings.Development.json" Line="1" Column="1" />
+      <File FileName="Burfa.Api/GameManager.cs" Line="29" Column="28" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">

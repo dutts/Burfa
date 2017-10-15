@@ -1,6 +1,5 @@
 ﻿using System;
 using Autofac;
-using Burfa.Api.GameSession;
 using Burfa.Bots;
 using Burfa.Common.Engine;
 using Burfa.Common.Engine.Types;
@@ -31,15 +30,14 @@ namespace Burfa.Api
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".Burfa.Session";
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                //options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
             });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterType<GameSessions>().As<IGameSessions>().SingleInstance();
-            builder.RegisterType<Game>().As<IGame>().SingleInstance();
+            builder.RegisterType<GameManager>().As<IGameManager>().SingleInstance();
             builder.RegisterType<RandomBot>().As<IBurfaBot>().SingleInstance().WithParameter("Player", Player.White);
         }
 

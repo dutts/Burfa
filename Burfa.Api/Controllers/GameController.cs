@@ -1,4 +1,5 @@
-﻿using Burfa.Bots;
+﻿using System;
+using Burfa.Bots;
 using Burfa.Common.Engine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,13 +10,13 @@ namespace Burfa.Api.Controllers
     {
         const string SessionGameName = "_GameName";
 
-        private readonly IGame _game;
-        readonly IBurfaBot _burfaBot;
+        private readonly IGameManager _gameManager;
+        private readonly IBurfaBot _bot;
 
-        public GameController(IGame game, IBurfaBot burfaBot)
+        public GameController(IGameManager gameManager, IBurfaBot bot)
         {
-            _burfaBot = burfaBot;
-            _game = game;
+            _bot = bot;
+            _gameManager = gameManager;
         }
 
         public IActionResult Index()
@@ -25,25 +26,43 @@ namespace Burfa.Api.Controllers
 
         public IActionResult NewGame(string gameId)
         {
-            HttpContext.Session.SetString(SessionGameName, gameId);
-            return Content($"New game {gameId} created");
+            string response;
+            if (_gameManager.Contains(gameId))
+            {
+                HttpContext.Session.Set(SessionGameName, gameId);
+                response = $"Game {gameId} is already created, rejoining";
+            }
+            else
+            {
+                _gameManager.Create(gameId);
+                HttpContext.Session.Set(SessionGameName, gameId);
+                response = $"Game {gameId} created";
+            }
+            return Content(response);
         }
 
         public IActionResult Board()
         {
-            var board = _game.Board;
-            //var json = JsonConvert.SerializeObject(board);
+            var gameId = HttpContext.Session.Get<string>(SessionGameName);
+            if (gameId != null && _gameManager.Contains(gameId))
+            {
+                var game = _gameManager.GetOrAdd(gameId);
+                return Content(game.Board.ToDisplayString());
+            }
 
-            //var name = HttpContext.Session.GetString(SessionKeyName);
-            //var yearsMember = HttpContext.Session.GetInt32(SessionKeyYearsMember);
-            return Content(board.ToDisplayString());
+            return NotFound();
         }
 
         public IActionResult TakeTurn(int x, int y)
         {
-            _game.TakeTurn(x, y);
-            var computerTurn = _burfaBot.GetTurn();
-            _game.TakeTurn(computerTurn.Item1, computerTurn.Item2);
+
+            var gameId = HttpContext.Session.Get<string>(SessionGameName);
+            var game = _gameManager.GetOrAdd(gameId);
+
+            game.TakeTurn(x, y);
+
+            var computerTurn = _bot.GetTurn(game);
+            game.TakeTurn(computerTurn.Item1, computerTurn.Item2);
 
             return RedirectToAction("Board");
         }

@@ -23,7 +23,7 @@ namespace Burfa.ConsoleGame
                 game.ToConsole();
 
 
-                var computerPlayer = new RandomBot(game, Player.White);
+                var computerPlayer = new RandomBot();
 
                 while ((game.CurrentGameState == GameState.InPlay) || (game.CurrentGameState == GameState.Initial))
                 {
@@ -47,7 +47,7 @@ namespace Burfa.ConsoleGame
                     }
                     else // BOT
                     {
-                        var computerTurn = computerPlayer.GetTurn();
+                        var computerTurn = computerPlayer.GetTurn(game);
                         game.TakeTurn(computerTurn.Item1, computerTurn.Item2);
                         game.ToConsole();
                     }

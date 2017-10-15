@@ -7,4 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Burfa.Common\Burfa.Common.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="BotBase.cs" />
+  </ItemGroup>
 </Project>
