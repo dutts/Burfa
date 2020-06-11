@@ -1,31 +1,31 @@
 ﻿using Burfa.Common.Board;
 using Burfa.Common.Engine;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
-namespace Burtfa.Common.Tests
+namespace Burfa.Common.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class GameBoardTests
     {
-        [TestMethod]
+        [Test]
         public void CreateGameBoard__DefaultEdgeWidth__CorrectNUmberOfSquares()
         {
-            var gameBoard = new Board();
+            var gameBoard = new Board.Board();
             Assert.AreEqual(64, gameBoard.GameBoardSquareCount);
         }
 
-        [TestMethod]
+        [Test]
         public void CreateGameBoard__DefinedEdgeWidth__CorrectNUmberOfSquares()
         {
-            var gameBoard = new Board(10);
+            var gameBoard = new Board.Board(10);
             Assert.AreEqual(100, gameBoard.GameBoardSquareCount);
         }
 
-        [TestMethod]
+        [Test]
         public void Constructor__IterateOverGeneratedSquares__CorrectXYPositions()
         {
             int boardEdgeLength = 8;
-            var gameBoard = new Board(boardEdgeLength);
+            var gameBoard = new Board.Board(boardEdgeLength);
             for (int i = 0; i < boardEdgeLength; i++)
             {
                 for (int j = 0; j < boardEdgeLength; j++)
@@ -38,11 +38,11 @@ namespace Burtfa.Common.Tests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void GetRow__CorrectSquaresReturned()
         {
             int boardEdgeLength = 8;
-            var gameBoard = new Board(boardEdgeLength);
+            var gameBoard = new Board.Board(boardEdgeLength);
 
             for (int rowNum = 0; rowNum < boardEdgeLength; rowNum++)
             {
@@ -57,11 +57,11 @@ namespace Burtfa.Common.Tests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void GetColumn__CorrectSquaresReturned()
         {
             int boardEdgeLength = 8;
-            var gameBoard = new Board(boardEdgeLength);
+            var gameBoard = new Board.Board(boardEdgeLength);
 
             for (int columnNum = 0; columnNum < boardEdgeLength; columnNum++)
             {
@@ -76,11 +76,11 @@ namespace Burtfa.Common.Tests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Completed__CompleteBoard__ReturnsTrue()
         {
             int boardEdgeLength = 2;
-            var gameBoard = new Board(boardEdgeLength);
+            var gameBoard = new Board.Board(boardEdgeLength);
             for (int columnNum = 0; columnNum < boardEdgeLength; columnNum++)
             {
                 for (int rowNum = 0; rowNum < boardEdgeLength; rowNum++)
@@ -92,11 +92,11 @@ namespace Burtfa.Common.Tests
             Assert.IsTrue(gameBoard.Completed);
         }
 
-        [TestMethod]
+        [Test]
         public void Completed__PartialBoard__ReturnsFalse()
         {
             int boardEdgeLength = 2;
-            var gameBoard = new Board(boardEdgeLength);
+            var gameBoard = new Board.Board(boardEdgeLength);
             for (int rowNum = 0; rowNum < boardEdgeLength; rowNum++)
             {
                 gameBoard.SetSquare(1, rowNum, (rowNum%2 == 0) ? Player.Black : Player.White);
@@ -104,10 +104,10 @@ namespace Burtfa.Common.Tests
             Assert.IsFalse(gameBoard.Completed);
         }
 
-        [TestMethod]
+        [Test]
         public void GetPlayerScore__Black1White0_Black1White0()
         {
-            var gameBoard = new Board(8);
+            var gameBoard = new Board.Board(8);
             gameBoard.SetSquare(0, 0, Player.Black);
             Assert.AreEqual(1, gameBoard.GetPlayerScore(Player.Black));
             Assert.AreEqual(0, gameBoard.GetPlayerScore(Player.White));

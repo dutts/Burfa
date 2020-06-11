@@ -1,18 +1,17 @@
-﻿using Burfa.Common;
-using Burfa.Common.Board;
+﻿using Burfa.Common.Board;
 using Burfa.Common.Engine;
 using FakeItEasy;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
-namespace Burtfa.Common.Tests
+namespace Burfa.Common.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class GameRulesTests
     {
         private Rules _gameRules;
         private BoardSquare[] _testSequence;
 
-        [TestInitialize]
+        [SetUp]
         public void Setup()
         {
             _testSequence = new BoardSquare[8];
@@ -20,10 +19,10 @@ namespace Burtfa.Common.Tests
             {
                 _testSequence[i] = new BoardSquare();
             }
-            _gameRules = new Rules(A.Fake<Board>());
+            _gameRules = new Rules(A.Fake<Board.Board>());
         }
 
-        [TestMethod]
+        [Test]
         public void IsValidInSequence__BWX00000_BlackMoveX__ReturnsTrue()
         {
             _testSequence[0].SetBlack();
@@ -33,7 +32,7 @@ namespace Burtfa.Common.Tests
             Assert.IsTrue(isValid);
         }
 
-        [TestMethod]
+        [Test]
         public void IsValidInSequence__BWX00000_WhiteMoveX__ReturnsFalse()
         {
             _testSequence[0].SetBlack();
@@ -43,7 +42,7 @@ namespace Burtfa.Common.Tests
             Assert.IsFalse(isValid);
         }
 
-        [TestMethod]
+        [Test]
         public void IsValidInSequence__BW0X0000_BlackMoveX__ReturnsFalse()
         {
             _testSequence[0].SetBlack();
@@ -53,7 +52,7 @@ namespace Burtfa.Common.Tests
             Assert.IsFalse(isValid);
         }
 
-        [TestMethod]
+        [Test]
         public void IsValidInSequence__BW0X0000_WhiteMoveX__ReturnsFalse()
         {
             _testSequence[0].SetBlack();
@@ -63,7 +62,7 @@ namespace Burtfa.Common.Tests
             Assert.IsFalse(isValid);
         }
 
-        [TestMethod]
+        [Test]
         public void IsValidInSequence__00000XWB_BlackMoveX__ReturnsTrue()
         {
             _testSequence[7].SetBlack();
@@ -73,7 +72,7 @@ namespace Burtfa.Common.Tests
             Assert.IsTrue(isValid);
         }
 
-        [TestMethod]
+        [Test]
         public void IsValidInSequence__00000XWB_WhiteMoveX__ReturnsFalse()
         {
             _testSequence[7].SetBlack();
@@ -84,7 +83,7 @@ namespace Burtfa.Common.Tests
         }
 
 
-        [TestMethod]
+        [Test]
         public void IsValidInSequence__000XWB00_BlackMoveX__ReturnsTrue()
         {
             _testSequence[4].SetWhite();
@@ -94,7 +93,7 @@ namespace Burtfa.Common.Tests
             Assert.IsTrue(isValid);
         }
 
-        [TestMethod]
+        [Test]
         public void IsValidInSequence__000XWB00_WhiteMoveX__ReturnsFalse()
         {
             _testSequence[4].SetWhite();
@@ -104,7 +103,7 @@ namespace Burtfa.Common.Tests
             Assert.IsFalse(isValid);
         }
 
-        [TestMethod]
+        [Test]
         public void IsValidInSequence__000XWBW0_WhiteMoveX__ReturnsFalse()
         {
             _testSequence[4].SetWhite();

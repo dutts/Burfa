@@ -1,16 +1,15 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 using Burfa.Bots;
 using Burfa.Common.Board;
 using Burfa.Common.Engine;
 
-namespace Burfa.ConsoleGame
+namespace Burfa.GameConsole
 {
-    internal class Program
+    class Program
     {
         private static IContainer Container;
 
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<Rules>().As<IGameRules>().SingleInstance();
@@ -23,7 +22,7 @@ namespace Burfa.ConsoleGame
             {
                 var engine = scope.Resolve<IGameEngine>();
                 engine.ToConsole();
-            
+
 
                 var computerPlayer = scope.Resolve<IBurfaBot>();
 
@@ -31,8 +30,8 @@ namespace Burfa.ConsoleGame
                 {
                     if (engine.CurrentPlayer == Player.Black)
                     {
-                        Console.WriteLine("Enter move as X,Y. S to skip or Q to quit:");
-                        string line = Console.ReadLine();
+                        System.Console.WriteLine("Enter move as X,Y. S to skip or Q to quit:");
+                        string line = System.Console.ReadLine();
                         if (line.ToUpper() == "Q") break;
                         if (line.ToUpper() == "S")
                         {
@@ -43,7 +42,7 @@ namespace Burfa.ConsoleGame
                             string[] coords = line.Split(',');
                             int x, y;
                             if (coords.Length != 2 || !TryParseCoords(coords, out x, out y)) continue;
-                            engine.TakeTurn(x, y);                            
+                            engine.TakeTurn(x, y);
                         }
                         engine.ToConsole();
                     }
